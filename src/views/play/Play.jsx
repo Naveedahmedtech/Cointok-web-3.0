@@ -4,7 +4,8 @@ import TopSection from "./components/TopSection";
 const Play = () => {
   return (
     <div className="px-10">
-      <TopSection />
+      Coming soon
+      {/* <TopSection /> */}
     </div>
   );
 };
