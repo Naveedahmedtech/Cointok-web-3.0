@@ -19,7 +19,7 @@ const NavLinks = () => {
         />
         Play WOTF
       </Link>
-      <Link className="text-text-light text-sm">
+      <Link to="add-coins" className="text-text-light text-sm">
         <Badge className="flex justify-center items-center">
           <img src={simile} alt="Simile Icon" className="w-4 h-4 mr-2" />
           Add Coin

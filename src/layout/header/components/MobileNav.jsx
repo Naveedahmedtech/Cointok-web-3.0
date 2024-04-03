@@ -15,7 +15,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
       } transition-transform duration-300 ease-in-out shadow-xl`}
     >
       <button onClick={() => setIsOpen(false)} className="p-4">
-        <FiX className="text-white text-2xl" /> {/* Close icon */}
+        <FiX className="text-white text-2xl" /> 
       </button>
       <div className="flex flex-col items-center mt-10">
         <Search className="bg-primary" />
@@ -38,7 +38,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
             Play WOTF
           </Link>
           <Link
-            to=""
+            to="add-coins"
             className="text-sm flex items-center gap-2 hover:text-gray-300 transition-colors duration-200"
           >
             <Badge className="flex items-center justify-center gap-2">

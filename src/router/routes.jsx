@@ -5,8 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import { Header } from "../layout";
-import { Home, NewCoin } from "../views";
-import Play from "../views/play/Play";
+import { AddCoins, Home, NewCoin, Play } from "../views";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +14,7 @@ export const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="new-coins" element={<NewCoin />} />
         <Route path="play" element={<Play />} />
+        <Route path="add-coins" element={<AddCoins />} />
       </Route>
     </>
   )

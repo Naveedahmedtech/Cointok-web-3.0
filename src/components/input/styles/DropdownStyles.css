@@ -1,0 +1,44 @@
+/* DropdownStyles.css */
+
+.outlinedDropdown__container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 2px solid #323232;
+    border-radius: 4px;
+    background-color: #1A1A1A;
+    transition: border-color 0.3s;
+}
+
+.outlinedDropdown__container:focus-within {
+    border-color: #3f51b5;
+}
+
+.outlinedDropdown__label {
+    position: absolute;
+    left: 10px;
+    top: -12px;
+    background-color: #1A1A1A;
+    padding: 0 5px;
+    transition: all 0.2s;
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+.outlinedDropdown__select {
+    flex: 1;
+    border: none;
+    background-color: #1A1A1A;
+    padding: 8px 32px 8px 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.outlinedDropdown__arrow {
+    position: absolute;
+    right: 8px;
+    pointer-events: none;
+}

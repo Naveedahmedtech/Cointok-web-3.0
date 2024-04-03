@@ -1,0 +1,67 @@
+/* DatePickerStyles.css */
+
+/* Change the background color of the dropdown */
+.react-datepicker__month-container,
+.react-datepicker__header,
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text,
+.react-datepicker__month-dropdown,
+.react-datepicker__year-dropdown,
+.react-datepicker__month-year-dropdown {
+    background-color: #323232 !important;
+    /* Your desired background color */
+    color: #ffffff !important;
+    /* Adjust text color for better visibility */
+}
+
+/* Optionally, customize the selected day and hover styles */
+.react-datepicker__day--selected,
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day:hover {
+    background-color: #505050 !important;
+    /* Darker shade for selection */
+    color: #ffffff !important;
+}
+
+/* Adjust the arrow colors if needed */
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+    filter: invert(1);
+    /* Inverts the arrow icon colors for better visibility */
+}
+
+/* Adjustments for the navigation arrows, ensuring they are visible against the dark background. */
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+    /* Example to ensure visibility, replace with your custom arrow styles or icons */
+    border-color: transparent transparent transparent #ffffff !important;
+    /* Example arrow color */
+}
+
+
+.react-datepicker__navigation {
+    color: #fff !important;
+    /* Override the arrow color */
+}
+
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+    background-color: red !important;
+    color: #fff !important;
+}
+
+.react-datepicker__navigation--previous::before,
+.react-datepicker__navigation--next::before {
+    border-color: #fff !important;
+}
+
+.react-datepicker__navigation--previous svg,
+.react-datepicker__navigation--next svg {
+    fill: #fff !important;
+}

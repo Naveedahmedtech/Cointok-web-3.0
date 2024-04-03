@@ -1,0 +1,16 @@
+.gradient-button {
+    position: relative;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    transition: color 0.4s, background-color 0.4s;
+    overflow: hidden;
+    border: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #743ad5, #d53a9d);
+}
+
+.bg-gradient {
+    background-image: linear-gradient(to right, #6a0dad, #892ece, #00d4ff);
+}
