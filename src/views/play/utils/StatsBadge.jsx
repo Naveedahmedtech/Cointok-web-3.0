@@ -4,5 +4,5 @@ const StatsBadge = ({ icon, count }) => (
     <p>{count}</p>
   </div>
 );
-
+ 
 export default StatsBadge;

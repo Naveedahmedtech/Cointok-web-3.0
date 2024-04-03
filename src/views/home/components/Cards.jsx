@@ -2,6 +2,7 @@ import React from "react";
 import Text from "../../../components/text/Text";
 import rightIcon from "../../../assets/icons/right-arrow.png";
 import defaultIcon1 from "../../../assets/icons/default-icon1.png";
+import { Link } from "react-router-dom";
 
 const Cards = () => {
   const newListingData = [
@@ -73,7 +74,8 @@ const CardComponent = ({ title, data }) => {
         {title}
       </Text>
       {data.map((item) => (
-        <div
+        <Link
+          to="play"
           key={item.id}
           className="flex justify-between items-center flex-wrap border-b-2 border-footer p-2"
         >
@@ -90,7 +92,7 @@ const CardComponent = ({ title, data }) => {
             </div>
             <img src={rightIcon} alt="" className="w-auto h-6" />
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -27,7 +27,7 @@ const BitCoinHeading = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center text-text-light">
-      <div className="flex items-center space-x-2 mb-4 md:mb-0">
+      <div className="flex items-center flex-wrap space-x-2 mb-4 md:mb-0">
         <img src={binance} alt="" className="w-16 h-16" />
         <div className="flex flex-col md:space-x-4">
           <div>

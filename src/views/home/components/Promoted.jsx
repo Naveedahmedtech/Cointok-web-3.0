@@ -11,13 +11,20 @@ import Text from "../../../components/text/Text";
 import Badge from "../../../components/badge/Badge";
 import { columns, dummyData } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
+import { useNavigate } from "react-router-dom";
 
 const BestRecords = () => {
   const totalRecord = dummyData.length;
+  const navigate = useNavigate();
+
   const dataRows = dummyData.map((item, index) => {
     const rank = (index + 1).toString().padStart(2, "0");
     return [
-      <tr key={index}>
+      <tr
+        key={index}
+        onClick={() => navigate(`play`)}
+        className="cursor-pointer hover:opacity-70"
+      >
         <td className="text-text-secondary">{rank}</td>
         <td className="text-text-light">
           <IconText icon={item.coins.icon} text={item.coins.name} />
@@ -60,11 +67,6 @@ const BestRecords = () => {
         alt="Glow"
         className="w-auto absolute left-50 bottom-50 z-[-111] transform -translate-x-1/2 -translate-y-1/2"
       />
-      {/* <img
-        src={glow}
-        alt="Glow"
-        className="w-auto absolute left-1/2 h-72 top-full transform -translate-x-1/2 -translate-y-1/2"
-      /> */}
       <Table
         header={
           <div className="flex items-center flex-wrap m-5 gap-3">

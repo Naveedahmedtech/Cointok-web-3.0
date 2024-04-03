@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SwapImageItems from "./SwapImageItems"; // Ensure this import is correct
 import logoIcon from "../../../assets/icons/default-icon2.png";
+import stats from "../../../assets/stats.png";
 
 const swapData = [
   {
@@ -15,7 +16,7 @@ const swapData = [
     platform: "Platform B",
     image: logoIcon,
     subtitle: "Exchange",
-    buttonText: "Trade",
+    buttonText: "Buy",
   },
 ];
 
@@ -39,10 +40,19 @@ const SwapItem = ({ buyTax = "0.00", saleTax = "0.00" }) => {
         />
       ))}
       <div className="mt-5">
-        <p className="text-text-light text-center">Stats</p>
+        <div className="flex justify-center items-center">
+          <p className="text-text-light text-center text-xl">Stats</p>
+          <img src={stats} alt="" className="w-auto h-6 ms-2" />
+        </div>
         <div className="flex justify-around">
-          <p className="text-text-light">Sale Tax: {saleTax} %</p>
-          <p className="text-text-light">Buy Tax: {buyTax} %</p>
+          <div className="flex flex-col">
+            <p className="text-text-secondary">Sale Tax </p>
+            <p className="text-text-light">{saleTax} %</p>
+          </div>
+          <div className="flex flex-col">
+            <p className="text-text-secondary">Buy Tax</p>
+            <p className="text-text-light">{buyTax} %</p>
+          </div>
         </div>
       </div>
     </div>
