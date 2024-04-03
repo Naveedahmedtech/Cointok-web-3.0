@@ -5,8 +5,8 @@ const OutlinedTextArea = ({
   label,
   placeholder,
   required = false,
-  defaultValue = "",
   rows = 3, // Default number of rows
+  defaultValue = "",
 }) => {
   return (
     <div className="relative border-2 border-border-secondary rounded-md p-2 mt-4">

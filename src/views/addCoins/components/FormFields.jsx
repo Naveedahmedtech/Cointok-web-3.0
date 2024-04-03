@@ -76,6 +76,7 @@ const FormFields = () => {
           label="Description"
           placeholder="Describe your coin. What makes the coin different from others? What is the goal/purpose of the coin?"
           required
+          rows={5}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">

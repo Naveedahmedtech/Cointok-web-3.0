@@ -4,9 +4,9 @@ import Text from "../text/Text";
 
 const PromoteCoinButton = () => {
   return (
-    <div className="border-2 border-text-primary px-4 py-2 flex justify-between items-center rounded-full my-10 max-w-sm">
+    <div className="border-2 border-text-primary px-2 py-2 flex justify-between items-center rounded-full my-10 max-w-[250px]">
       <Text className="text-text-primary">Promote Your Coin</Text>
-      <div className="text-text-light mx-3">|</div>
+      <div className="text-text-light">|</div>
       <img src={upIcon} alt="Up icon" className="w-auto h-6" />
     </div>
   );
