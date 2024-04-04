@@ -11,7 +11,7 @@ import Banner2 from "./components/Banner2";
 const Home = () => {
   return (
     <>
-      <div className="px-10">
+      <div className="px-5">
         <Banner />
         <Banner2 />
         <Cards />

@@ -16,7 +16,7 @@ const Partners = () => {
       <img
         src={glow}
         alt="Decorative"
-        className="absolute left-[-80px] top-[-80px] h-64 z-10"
+        className="absolute left-[-80px] top-[-80px] h-64 z-[-9999999]"
       />
       <Text className="text-3xl lg:text-4xl font-bold text-text-light text-center my-5">
         Partners
@@ -27,14 +27,14 @@ const Partners = () => {
             key={index}
             src={image}
             alt="Partner logo"
-            className="w-auto h-6 md:h-10 mx-auto opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            className="w-auto h-6 md:h-10 mx-auto opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-pointer "
           />
         ))}
       </div>
       <img
         src={glow}
         alt="Decorative"
-        className="absolute right-[-20px] bottom-[-80px] h-64 z-10"
+        className="absolute right-[-20px] bottom-[-80px] h-64 z-[-9999999]"
       />
     </div>
   );

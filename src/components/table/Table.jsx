@@ -29,10 +29,16 @@ const Table = ({
           <table className="w-full">
             <thead>
               <tr>
-                {columns.map((column) => (
+                {columns.map((column, index) => (
                   <th
                     key={column.key}
-                    className="text-center px-4 py-2 text-text-secondary"
+                    className={`text-center px-4  text-text-secondary ${
+                      index === 0
+                        ? "sticky-column first-sticky"
+                        : index === 1
+                        ? "sticky-column second-sticky"
+                        : ""
+                    }`}
                   >
                     {column.title}
                   </th>
@@ -54,23 +60,6 @@ const Table = ({
       )}
     </div>
   );
-};
-
-Table.propTypes = {
-  header: PropTypes.node.isRequired,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      title: PropTypes.node.isRequired,
-    })
-  ).isRequired,
-  rowComponents: PropTypes.arrayOf(PropTypes.node).isRequired,
-  pageSize: PropTypes.number.isRequired,
-  showPagination: PropTypes.bool,
-};
-
-Table.defaultProps = {
-  showPagination: false,
 };
 
 export default Table;

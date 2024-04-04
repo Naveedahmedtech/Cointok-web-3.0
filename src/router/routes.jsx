@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { Header } from "../layout";
 import { AddCoins, Home, NewCoin, Play } from "../views";
+import ErrorNotFound from "../views/error/ErrorNotFound";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ export const router = createBrowserRouter(
         <Route path="new-coins" element={<NewCoin />} />
         <Route path="play" element={<Play />} />
         <Route path="add-coins" element={<AddCoins />} />
+        <Route path="*" element={<ErrorNotFound />} />
       </Route>
     </>
   )

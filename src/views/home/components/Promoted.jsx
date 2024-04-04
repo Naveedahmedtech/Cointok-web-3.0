@@ -14,7 +14,6 @@ import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
 
 const BestRecords = () => {
-  const totalRecord = dummyData.length;
   const navigate = useNavigate();
 
   const dataRows = dummyData.map((item, index) => {
@@ -25,8 +24,14 @@ const BestRecords = () => {
         onClick={() => navigate(`play`)}
         className="cursor-pointer hover:opacity-70"
       >
-        <td className="text-text-secondary">{rank}</td>
-        <td className="text-text-light">
+        <td
+          className={`text-text-secondary sticky-column second-sticky-column p-2 px-5`}
+        >
+          {rank}
+        </td>
+        <td
+          className={`text-text-secondary sticky-column third-sticky-column p-2 px-5`}
+        >
           <IconText icon={item.coins.icon} text={item.coins.name} />
         </td>
         <td className="text-text-info">{item.category}</td>
@@ -61,7 +66,7 @@ const BestRecords = () => {
   };
 
   return (
-    <div className="my-10  relative">
+    <div className="my-10 relative">
       <img
         src={glow}
         alt="Glow"
@@ -69,7 +74,7 @@ const BestRecords = () => {
       />
       <Table
         header={
-          <div className="flex items-center flex-wrap m-5 gap-3">
+          <div className="flex items-center flex-wrap m-5 ">
             <Text className="text-text-primary">Promoted</Text>
           </div>
         }

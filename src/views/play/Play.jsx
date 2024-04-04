@@ -7,7 +7,7 @@ import NewsLetter from "../home/components/NewsLetter";
 const Play = () => {
   return (
     <>
-      <div className="px-10">
+      <div className="px-5">
         <TopSection />
         <DownSection />
         <BestRecords />

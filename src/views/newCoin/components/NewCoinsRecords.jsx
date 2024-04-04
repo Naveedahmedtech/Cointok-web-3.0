@@ -22,11 +22,17 @@ const NewCoinsRecords = () => {
     return [
       <tr
         key={index}
-        onClick={() => navigate(`play`)}
+        onClick={() => navigate(`/play`)}
         className="cursor-pointer hover:opacity-70"
       >
-        <td className="text-text-secondary">{rank}</td>
-        <td className="text-text-light">
+        <td
+          className={`text-text-secondary sticky-column second-sticky-column p-2 px-5`}
+        >
+          {rank}
+        </td>
+        <td
+          className={`text-text-secondary sticky-column third-sticky-column p-2 px-5`}
+        >
           <IconText icon={item.coins.icon} text={item.coins.name} />
         </td>
         <td className="text-text-info">{item.category}</td>

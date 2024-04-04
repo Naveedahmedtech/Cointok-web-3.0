@@ -10,3 +10,31 @@ body {
     background-color: #0B090D;
     overflow-x: hidden;
 }
+
+
+
+@media screen and (max-width: 768px) {
+    .sticky-column {
+        position: -webkit-sticky;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background-color: #0B090D;
+    }
+
+    .second-sticky-column {
+        left: 0px;
+    }
+
+    .third-sticky-column {
+        left: 60px;
+    }
+
+    .first-sticky {
+        left: 0px;
+    }
+
+    .second-sticky {
+        left: 60px;
+    }
+}

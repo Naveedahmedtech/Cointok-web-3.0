@@ -7,7 +7,7 @@ import Banner from "../home/components/Banner";
 const NewCoin = () => {
   return (
     <>
-      <div className="px-10">
+      <div className="px-5">
         <Banner />
         <NewCoinsRecords />
         <Partners />

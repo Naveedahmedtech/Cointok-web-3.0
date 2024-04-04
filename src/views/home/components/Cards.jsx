@@ -69,27 +69,25 @@ export default Cards;
 
 const CardComponent = ({ title, data }) => {
   return (
-    <div className="bg-secondary border-2 border-footer flex-grow">
-      <Text className="text-text-primary p-5 text-xl  border-b-2 border-footer">
+    <div className="bg-secondary border-2 p-2 border-footer flex-grow">
+      <Text className="text-text-primary text-xl  border-b-2 border-footer py-2">
         {title}
       </Text>
       {data.map((item) => (
         <Link
           to="play"
           key={item.id}
-          className="flex justify-between items-center flex-wrap border-b-2 border-footer p-2"
+          className="flex justify-between items-center border-b-2 border-footer p-2 py-5"
         >
-          <div className="flex items-center gap-5">
-            <img src={item.icon} alt="" />
+          <div className="flex items-center gap-2">
+            <img src={item.icon} alt="" className="w-auto h-12" />
             <div>
               <Text className="text-text-light">{item.title}</Text>
               <Text className="text-text-secondary">{item.subtitle}</Text>
             </div>
           </div>
-          <div className="flex gap-5">
-            <div>
-              <Text className="text-text-secondary">{item.duration}</Text>
-            </div>
+          <div className="flex">
+            <Text className="text-text-secondary">{item.duration}</Text>
             <img src={rightIcon} alt="" className="w-auto h-6" />
           </div>
         </Link>

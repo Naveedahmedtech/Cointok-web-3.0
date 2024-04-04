@@ -20,7 +20,7 @@ const UploadImage = () => {
 
   return (
     <div>
-      <div className="bg-secondary border-2 border-border-secondary px-4 sm:px-10 py-5 rounded-lg flex-grow-0 md:flex-grow lg:flex-grow-0 min-w-[250px]">
+      <div className="bg-secondary border-2 border-border-secondary px-4 sm:px-10 py-5 rounded-lg flex-grow-0 md:flex-grow lg:flex-grow-0 min-w-[280px]">
         <div className="text-center">
           <div className="my-5">
             <Text className="text-text-primary text-lg sm:text-xl font-bold">

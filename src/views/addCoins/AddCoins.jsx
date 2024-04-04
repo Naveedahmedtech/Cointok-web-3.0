@@ -4,8 +4,8 @@ import FormFields from "./components/FormFields";
 
 const AddCoins = () => {
   return (
-    <div className="p-10">
-      <div className="flex justify-between flex-wrap gap-5 items-start">
+    <div className="px-5">
+      <div className="flex justify-between flex-wrap gap-5 items-start my-10">
         <UploadImage />
         <FormFields />
       </div>

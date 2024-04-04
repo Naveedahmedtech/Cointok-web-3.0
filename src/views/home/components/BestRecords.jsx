@@ -14,7 +14,6 @@ import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
 
 const BestRecords = () => {
-  const totalRecord = dummyData.length;
   const navigate = useNavigate();
 
   const dataRows = dummyData.map((item, index) => {
@@ -25,8 +24,14 @@ const BestRecords = () => {
         onClick={() => navigate(`play`)}
         className="cursor-pointer hover:opacity-70"
       >
-        <td className="text-text-secondary">{rank}</td>
-        <td className="text-text-light">
+        <td
+          className={`text-text-secondary sticky-column second-sticky-column`}
+        >
+          {rank}
+        </td>
+        <td
+          className={`text-text-secondary sticky-column third-sticky-column p-2 px-5`}
+        >
           <IconText icon={item.coins.icon} text={item.coins.name} />
         </td>
         <td className="text-text-info">{item.category}</td>
@@ -67,15 +72,12 @@ const BestRecords = () => {
         alt="Glow"
         className="w-auto absolute left-50 bottom-50 z-[-111] transform -translate-x-1/2 -translate-y-1/2"
       />
-      {/* <img
-        src={glow}
-        alt="Glow"
-        className="w-auto absolute left-1/2 h-72 top-full transform -translate-x-1/2 -translate-y-1/2"
-      /> */}
       <Table
         header={
           <div className="flex items-center flex-wrap m-5 gap-3">
-            <Badge className="text-text-light">Today's Best</Badge>
+            <Badge className="text-text-light">
+              Today's Best
+            </Badge>
             <Text className="text-text-light">All Time Best</Text>
           </div>
         }

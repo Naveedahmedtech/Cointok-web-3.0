@@ -12,13 +12,13 @@ const DownSection = () => {
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-8 z-10">
         <PromoteCoinButton />
-        <div className="flex justify-between items-center flex-wrap h-full mt-5 md:mt-0">
+        <div className="flex justify-between items-center  h-full mt-5 md:mt-0">
           <div
             className="relative w-full h-28 md:h-32 rounded-4xl bg-cover bg-center"
             style={{ backgroundImage: `url(${banner})` }}
           >
-            <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col md:flex-row items-center justify-between p-2 md:p-3 text-center md:text-left">
-              <div className="flex items-center justify-center flex-wrap md:justify-start space-x-2 md:space-x-3">
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-row items-center justify-between p-2 md:p-3 text-center md:text-left">
+              <div className="flex items-center justify-start space-x-2 md:space-x-3">
                 <img
                   src={game}
                   alt="Game"
