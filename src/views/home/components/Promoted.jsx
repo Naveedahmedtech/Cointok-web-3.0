@@ -25,12 +25,12 @@ const BestRecords = () => {
         className="cursor-pointer hover:opacity-70"
       >
         <td
-          className={`text-text-secondary sticky-column second-sticky-column p-2 px-5`}
+          className={`text-text-light sticky-column second-sticky-column p-2 px-5`}
         >
           {rank}
         </td>
         <td
-          className={`text-text-secondary sticky-column third-sticky-column p-2 px-5`}
+          className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
         >
           <IconText icon={item.coins.icon} text={item.coins.name} />
         </td>
@@ -48,7 +48,7 @@ const BestRecords = () => {
           <FormatMarketCap value={item.price} />
         </td>
         <td className="text-text-light">{formatDate(item.launchDate)}</td>
-        <td className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md mr-3">
+        <td className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2">
           <img src={heartFill} alt="" />
           <Text>{item.votes}</Text>
         </td>
@@ -75,7 +75,7 @@ const BestRecords = () => {
       <Table
         header={
           <div className="flex items-center flex-wrap m-5 ">
-            <Text className="text-text-primary">Promoted</Text>
+            <Text className="text-text-primary text-xl font-bold">Promoted</Text>
           </div>
         }
         columns={columns.map((column) => ({

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SwapImageItems from "./SwapImageItems"; // Ensure this import is correct
+import SwapImageItems from "./SwapImageItems"; 
 import logoIcon from "../../../assets/icons/default-icon2.png";
 import stats from "../../../assets/stats.png";
 
@@ -24,12 +24,11 @@ const SwapItem = ({ buyTax = "0.00", saleTax = "0.00" }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // This is where you might fetch your data from an API instead
     setItems(swapData);
   }, []);
 
   return (
-    <div className="bg-secondary p-5 mt-10 rounded-lg">
+    <div className="bg-secondary border-2 border-[#323232] mt-10 rounded-lg">
       {items.map(({ id, platform, image, subtitle, buttonText }) => (
         <SwapImageItems
           key={id}
@@ -39,12 +38,12 @@ const SwapItem = ({ buyTax = "0.00", saleTax = "0.00" }) => {
           buttonText={buttonText}
         />
       ))}
-      <div className="mt-5">
-        <div className="flex justify-center items-center">
+      <div className="mt-10">
+        <div className="flex justify-center items-center border-b border-[#323232] pb-2">
           <p className="text-text-light text-center text-xl">Stats</p>
           <img src={stats} alt="" className="w-auto h-6 ms-2" />
         </div>
-        <div className="flex justify-around">
+        <div className="flex justify-between my-5 px-5">
           <div className="flex flex-col">
             <p className="text-text-secondary">Sale Tax </p>
             <p className="text-text-light">{saleTax} %</p>

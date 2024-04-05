@@ -23,42 +23,39 @@ const BitCoinHeading = () => {
   };
 
   const address = "0x4e1C1BD35397042319Fe252d2e324ad439B19f1e";
-  const displayAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+  const displayAddress = `${address.substring(0, 11)}........`;
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center text-text-light">
-      <div className="flex items-center flex-wrap space-x-2 mb-4 md:mb-0">
-        <img src={binance} alt="" className="w-16 h-16" />
-        <div className="flex flex-col md:space-x-4">
+    <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5">
+      <div className="flex items-center space-x-2 mb-4">
+        <img src={binance} alt="" className="w-8 h-8 md:w-16 md:h-16" />
+        <div className="flex  flex-col md:space-x-4">
           <div>
             <p>Binance Smart Chain</p>
           </div>
           <div>
             <Tooltip content={isCopied ? "Copied!" : address}>
               <p
-                className={`cursor-pointer ${isCopied ? "block" : "block"}`}
+                className={`cursor-pointer block md:hidden ${
+                  isCopied ? "block" : "block"
+                }`}
                 onClick={() => copyToClipboard(address)}
               >
                 {displayAddress}
               </p>
               <p
-                className={`cursor-pointer hidden md:block ${
-                  isCopied ? "block" : "block"
-                }`}
+                className={`cursor-pointer hidden md:block `}
                 onClick={() => copyToClipboard(address)}
               >
                 {address}
               </p>
             </Tooltip>
-            <div className="flex space-x-1">
-              {/* Conditionally rendering copy button based on screen size */}
+            <div className="flex space-x-1 mt-2">
               <Tooltip content={isCopied ? "Copied!" : address}>
                 <img
                   src={copy}
                   alt=""
-                  className={`w-6 h-6 cursor-pointer ${
-                    isCopied ? "hidden" : "block"
-                  }`}
+                  className={`w-6 h-6 cursor-pointer `}
                   onClick={() => copyToClipboard(address)}
                 />
               </Tooltip>

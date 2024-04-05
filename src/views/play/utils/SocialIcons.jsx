@@ -9,14 +9,13 @@ const socialImages = [insta, twitch, twitter, discord, unknown];
 
 const SocialIcons = () => {
   return (
-    <Link
-      to=""
-      className="flex justify-center items-center flex-wrap gap-5 my-10 py-5"
-    >
+    <div className="flex justify-center items-center flex-wrap gap-5 py-5 border-b border-[#323232]">
       {socialImages.map((image) => (
-        <img src={image} alt="" className="w-auto h-12" />
+        <Link to="">
+          <img src={image} alt="" className="w-auto h-12" />
+        </Link>
       ))}
-    </Link>
+    </div>
   );
 };
 

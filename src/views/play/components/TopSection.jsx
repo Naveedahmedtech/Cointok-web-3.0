@@ -14,7 +14,7 @@ const TopSection = () => {
           <LogoSection />
           <SwapItem platform="PancakeSwap" />
         </div>
-        <div className="lg:col-span-8 col-span-1 bg-secondary p-5 rounded-lg">
+        <div className="lg:col-span-8  bg-secondary py-5 rounded-lg border-2 border-[#323232]">
           <BitCoinHeading />
           <SocialIcons />
           <PriceDetails />

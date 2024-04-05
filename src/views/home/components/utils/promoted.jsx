@@ -1,6 +1,6 @@
 export const IconText = ({ icon, text }) => (
   <div className="flex items-center justify-center">
-    <img src={icon} alt="" className="w-4 h-4 mr-2" /> {text}
+    <img src={icon} alt="" className="w-8 h-8 mr-2" /> {text}
   </div>
 );
 

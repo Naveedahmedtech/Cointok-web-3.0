@@ -6,13 +6,15 @@ import game from "../../../assets/game.png";
 
 const DownSection = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 my-10 px-2 sm:px-5 mb-24">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5  mb-24">
       <div className="col-span-1 md:col-span-2 lg:col-span-4 z-10">
         <SafetyChecks />
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-8 z-10">
-        <PromoteCoinButton />
-        <div className="flex justify-between items-center  h-full mt-5 md:mt-0">
+        <div className="mb-16">
+          <PromoteCoinButton />
+        </div>
+        <div className="flex justify-between items-center  h-full ">
           <div
             className="relative w-full h-28 md:h-32 rounded-4xl bg-cover bg-center"
             style={{ backgroundImage: `url(${banner})` }}
