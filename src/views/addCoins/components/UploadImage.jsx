@@ -3,24 +3,27 @@ import Text from "../../../components/text/Text";
 import fileIcon from "../../../assets/file-icon.png";
 import PromoteCoinButton from "../../../components/button/PromoteCoinButton";
 
-const UploadImage = () => {
-  const [image, setImage] = useState(null);
+const UploadImage = ({ onImageUpload, error }) => {
   const [previewUrl, setPreviewUrl] = useState("");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.substr(0, 5) === "image") {
-      setImage(file);
+    if (file && file.type.startsWith("image/")) {
       setPreviewUrl(URL.createObjectURL(file));
+      onImageUpload(file);
     } else {
-      setImage(null);
       setPreviewUrl("");
+      onImageUpload(null);
     }
   };
 
   return (
-    <div>
-      <div className="bg-secondary border-2 border-border-secondary px-4 sm:px-10 py-5 rounded-lg flex-grow-0 md:flex-grow lg:flex-grow-0 min-w-[280px] mb-5">
+    <div className="flex flex-col">
+      <div
+        className={`bg-secondary border-2 border-border-secondary px-4 sm:px-10 py-5 rounded-lg flex-grow-0 md:flex-grow lg:flex-grow-0 min-w-[280px] mb-5 ${
+          error ? "border-rose-700" : "border-border-secondary"
+        }`}
+      >
         <div className="text-center">
           <div className="my-5">
             <Text className="text-text-primary text-lg sm:text-xl font-bold">
@@ -66,6 +69,7 @@ const UploadImage = () => {
             />
           </div>
         </div>
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}{" "}
       </div>
       <PromoteCoinButton />
     </div>

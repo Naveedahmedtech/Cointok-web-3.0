@@ -8,31 +8,37 @@ const OutlinedDropdown = ({
   options,
   required = false,
   defaultValue = "",
+  onChange,
+  error,
 }) => {
   return (
-    <div className="outlinedDropdown__container p-1">
-      <label htmlFor={id} className="outlinedDropdown__label">
-        {label}
-        {required && <span className="text-red-500">*</span>}
-      </label>
-      <select
-        id={id}
-        className="outlinedDropdown__select text-text-light"
-        required={required}
-        defaultValue={defaultValue}
-      >
-        {defaultValue && (
-          <option value="" disabled className="text-text-light">
-            {defaultValue}
-          </option>
-        )}
-        {options.map((option, index) => (
-          <option key={index} value={option.value} className="text-text-light">
-            {option.label}
-          </option>
-        ))}
-      </select>
-      <AiOutlineDown className="outlinedDropdown__arrow text-lg text-text-light" />
+    <div className="flex flex-col">
+      <div className="outlinedDropdown__container p-1">
+        <label htmlFor={id} className="outlinedDropdown__label">
+          {label}
+          {required && <span className="text-red-500">*</span>}
+        </label>
+        <select
+          id={id}
+          className="outlinedDropdown__select text-text-light"
+          required={required}
+          defaultValue={defaultValue}
+          onChange={onChange}
+        >
+          {defaultValue && (
+            <option value="" disabled className="text-text-light">
+              {defaultValue}
+            </option>
+          )}
+          {options?.map((option, index) => (
+            <option key={index} value={option.id} className="text-text-light">
+              {option?.name}
+            </option>
+          ))}
+        </select>
+        <AiOutlineDown className="outlinedDropdown__arrow text-lg text-text-light" />
+      </div>
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}{" "}
     </div>
   );
 };
