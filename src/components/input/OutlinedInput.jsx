@@ -5,7 +5,8 @@ const OutlinedInput = ({
   type = "text",
   required = false,
   onChange,
-  error, // New error prop
+  error,
+  value 
 }) => {
   return (
     <div className="flex flex-col">
@@ -28,6 +29,7 @@ const OutlinedInput = ({
           className="w-full bg-transparent p-1 text-sm focus:outline-none text-text-light"
           required={required}
           onChange={onChange}
+          value={value ? value : ''}
         />
       </div>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}{" "}

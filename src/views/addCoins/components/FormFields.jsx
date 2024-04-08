@@ -5,7 +5,16 @@ import OutlinedDropdown from "../../../components/input/OutlinedDropdown";
 import OutlinedTextArea from "../../../components/input/OutlinedTextArea";
 import Buttons from "./Buttons";
 
-const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  categories, platforms }) => {
+const FormFields = ({
+  handleChange,
+  handleButtonClick,
+  errors,
+  handleSubmit,
+  categories,
+  platforms,
+  isLoading,
+  formData,
+}) => {
   return (
     <div className="bg-secondary p-5 rounded-lg flex-grow">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -16,6 +25,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.coin_name}
+          value={formData.coin_name}
         />
         <OutlinedInput
           id="coin_symbol"
@@ -24,6 +34,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.coin_symbol}
+          value={formData.coin_symbol}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -34,6 +45,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.network}
+          value={formData.network}
         />
         <OutlinedDatePicker
           id="launch_date"
@@ -41,6 +53,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.launch_date}
+          value={formData.launch_date}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -52,6 +65,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           defaultValue="Please select..."
           onChange={handleChange}
           error={errors.listing_platform_id}
+          value={formData.listing_platform_id}
         />
         <OutlinedInput
           id="listing_link"
@@ -60,19 +74,25 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.listing_link}
+          value={formData.listing_link}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        <Buttons onButtonClick={handleButtonClick} error={errors.coin_type} />
+        <Buttons
+          onButtonClick={handleButtonClick}
+          error={errors.coin_type}
+          value={formData.website_link}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
         <OutlinedInput
-          id="contact_address"
-          label="Contact Address"
+          id="contract_address"
+          label="Contract Address"
           placeholder="Contact Address"
           required
           onChange={handleChange}
-          error={errors.contact_address}
+          error={errors.contract_address}
+          value={formData.contract_address}
         />
         <OutlinedDropdown
           id="category_id"
@@ -82,17 +102,19 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           defaultValue="Please select..."
           onChange={handleChange}
           error={errors.category_id}
+          value={formData.category_id}
         />
       </div>
       <div className="my-10">
         <OutlinedTextArea
-          id="description"
+          id="coin_description"
           label="Description"
           placeholder="Describe your coin. What makes the coin different from others? What is the goal/purpose of the coin?"
           required
           rows={5}
           onChange={handleChange}
-          error={errors.description}
+          error={errors.coin_description}
+          value={formData.coin_description}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -103,6 +125,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.website_link}
+          value={formData.website_link}
         />
         <OutlinedInput
           id="twitter_link"
@@ -111,6 +134,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.twitter_link}
+          value={formData.twitter_link}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -121,6 +145,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required
           onChange={handleChange}
           error={errors.telegram_contact}
+          value={formData.telegram_contact}
         />
         <OutlinedInput
           id="discard_link"
@@ -129,6 +154,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.discard_link}
+          value={formData.discard_link}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -139,6 +165,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.telegram_link}
+          value={formData.telegram_link}
         />
         <OutlinedInput
           id="reddit_link"
@@ -147,6 +174,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.reddit_link}
+          value={formData.reddit_link}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -157,6 +185,7 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.coinmarketcap_link}
+          value={formData.coinmarketcap_link}
         />
         <OutlinedInput
           id="coingecko_link"
@@ -165,14 +194,16 @@ const FormFields = ({ handleChange,handleButtonClick, errors, handleSubmit,  cat
           required={false}
           onChange={handleChange}
           error={errors.coingecko_link}
+          value={formData.coingecko_link}
         />
       </div>
       <div className="text-right">
         <button
           className="text-text-light bg-border-secondary border-2 border-text-primary px-10 py-3 rounded-lg hover:bg-primary"
           onClick={handleSubmit}
+          disabled={isLoading}
         >
-          Save
+          {isLoading ? "Saving.." : "Save"}
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Buttons.css";
 
-const Buttons = ({ onButtonClick, error }) => {
+const Buttons = ({ onButtonClick, error, value }) => {
   const [clickedButton, setClickedButton] = useState(null);
 
   const handleButtonClick = (buttonName) => {
@@ -14,17 +14,17 @@ const Buttons = ({ onButtonClick, error }) => {
       <div className="flex justify-center items-center flex-wrap md:flex-nowrap w-full">
         <p
           className={`gradient-button ${
-            clickedButton === "Fair Launch" ? "bg-gradient" : "border-gradient"
+            clickedButton === "fair_launch" ? "bg-gradient" : "border-gradient"
           } w-full text-center`}
-          onClick={() => handleButtonClick("Fair Launch")}
+          onClick={() => handleButtonClick("fair_launch")}
         >
           Fair Launch
         </p>
         <p
           className={`gradient-button ${
-            clickedButton === "Presale" ? "bg-gradient" : "border-gradient"
+            clickedButton === "presale" ? "bg-gradient" : "border-gradient"
           } w-full text-center`}
-          onClick={() => handleButtonClick("Presale")}
+          onClick={() => handleButtonClick("presale")}
         >
           Presale
         </p>

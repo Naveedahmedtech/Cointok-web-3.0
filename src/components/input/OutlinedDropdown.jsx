@@ -7,9 +7,10 @@ const OutlinedDropdown = ({
   label,
   options,
   required = false,
-  defaultValue = "",
+  placeholder = "Select an option", 
   onChange,
   error,
+  value, 
 }) => {
   return (
     <div className="flex flex-col">
@@ -22,23 +23,21 @@ const OutlinedDropdown = ({
           id={id}
           className="outlinedDropdown__select text-text-light"
           required={required}
-          defaultValue={defaultValue}
+          value={value} // Controlled value
           onChange={onChange}
         >
-          {defaultValue && (
-            <option value="" disabled className="text-text-light">
-              {defaultValue}
-            </option>
-          )}
+          <option value="" disabled>
+            {placeholder}
+          </option>
           {options?.map((option, index) => (
             <option key={index} value={option.id} className="text-text-light">
-              {option?.name}
+              {option.name}
             </option>
           ))}
         </select>
         <AiOutlineDown className="outlinedDropdown__arrow text-lg text-text-light" />
       </div>
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}{" "}
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   );
 };

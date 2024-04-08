@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles/DatePickerStyles.css";
 
-const OutlinedDatePicker = ({ id, label, required = false, onChange, error }) => {
-  const [startDate, setStartDate] = useState(new Date());
-
+const OutlinedDatePicker = ({
+  id,
+  label,
+  required = false,
+  onChange,
+  error,
+  value,
+}) => {
   const handleDateChange = (d) => {
-    const date = new Date(d);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
-    setStartDate(formattedDate);
+    const date = d ? new Date(d) : "";
+    const formattedDate = date
+      ? `${date.getFullYear()}-${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`
+      : "";
     onChange({
       target: {
         id,
@@ -30,16 +35,17 @@ const OutlinedDatePicker = ({ id, label, required = false, onChange, error }) =>
         </label>
         <DatePicker
           id={id}
-          selected={startDate}
+          selected={value ? new Date(value) : null}
           onChange={handleDateChange}
           className="w-full bg-transparent text-sm focus:outline-none text-text-light"
           required={required}
           showYearDropdown
           scrollableYearDropdown
           yearDropdownItemNumber={50}
+          placeholderText="Select date" 
         />
       </div>
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}{" "}
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   );
 };

@@ -2,7 +2,9 @@ import React from "react";
 import banner1 from "../../../assets/banners/banner1.png";
 import Text from "../../../components/text/Text";
 
-const Banner = () => {
+const Banner = ({ image }) => {
+  const displayImage = image ? image : banner1;
+
   return (
     <>
       <div className="flex flex-col lg:flex-row justify-between items-center my-10">
@@ -10,7 +12,15 @@ const Banner = () => {
           #1 Platform to discover newest coins!
         </Text>
         <div className="max-w-full md:max-w-[700px]">
-          <img src={banner1} alt="Banner 1" className="w-full" />
+          <img
+            src={displayImage}
+            alt="Banner 1"
+            className="w-full"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; 
+              currentTarget.src = banner1;
+            }}
+          />
         </div>
       </div>
     </>

@@ -23,9 +23,20 @@ export const apiSlice = createApi({
           url: "coin/store",
           method: "POST",
           body: formData,
+          headers: {
+            Accept: "application/json",
+          },
         };
       },
       invalidateTags: ["CoinStore"],
+    }),
+    getAdvertise: builder.query({
+      query: () => "advertise",
+      providesTags: ["Advertise"],
+    }),
+    getNewListing: builder.query({
+      query: () => "coin/new-listing",
+      providesTags: ["NewListing"],
     }),
   }),
 });
@@ -34,4 +45,6 @@ export const {
   useGetCategoriesQuery,
   useGetPlatformsQuery,
   useAddCoinMutation,
+  useGetAdvertiseQuery,
+  useGetNewListingQuery,
 } = apiSlice;
