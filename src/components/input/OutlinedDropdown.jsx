@@ -14,7 +14,9 @@ const OutlinedDropdown = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <div className="outlinedDropdown__container p-1">
+      <div className={`outlinedDropdown__container p-1 ${
+          error ? "border-red-500" : "border-border-secondary"
+        }`}>
         <label htmlFor={id} className="outlinedDropdown__label">
           {label}
           {required && <span className="text-red-500">*</span>}
