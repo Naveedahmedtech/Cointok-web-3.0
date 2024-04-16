@@ -6,7 +6,8 @@ import BitCoinHeading from "../utils/BitCoinHeading";
 import SocialIcons from "../utils/SocialIcons";
 import Description from "../utils/Description";
 
-const TopSection = () => {
+const TopSection = ({ details }) => {
+  console.log(details);
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 my-10">
@@ -15,10 +16,10 @@ const TopSection = () => {
           <SwapItem platform="PancakeSwap" />
         </div>
         <div className="lg:col-span-8  bg-secondary py-5 rounded-lg border-2 border-[#323232]">
-          <BitCoinHeading />
+          <BitCoinHeading details={details} />
           <SocialIcons />
           <PriceDetails />
-          <Description />
+          <Description description={details?.coin_description} />
         </div>
       </div>
     </>

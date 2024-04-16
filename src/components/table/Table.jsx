@@ -11,11 +11,11 @@ const Table = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(rowComponents.length / pageSize);
+  const totalPages = Math.ceil(rowComponents?.length / pageSize);
 
   const startRow = (currentPage - 1) * pageSize;
   const endRow = startRow + pageSize;
-  const visibleRows = rowComponents.slice(startRow, endRow);
+  const visibleRows = rowComponents?.slice(startRow, endRow);
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -23,13 +23,13 @@ const Table = ({
 
   return (
     <div>
-      <div className="bg-secondary rounded-lg overflow-auto">
+      <div className="bg-secondary rounded-3xl overflow-auto pr-2">
         {header}
         <div className="table-wrapper">
           <table className="w-full">
             <thead>
               <tr>
-                {columns.map((column, index) => (
+                {columns?.map((column, index) => (
                   <th
                     key={column.key}
                     className={`text-center px-4  text-text-secondary ${
@@ -40,7 +40,7 @@ const Table = ({
                         : ""
                     }`}
                   >
-                    {column.title}
+                    {column?.title}
                   </th>
                 ))}
               </tr>

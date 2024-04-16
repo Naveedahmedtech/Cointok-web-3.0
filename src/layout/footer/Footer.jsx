@@ -38,7 +38,7 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <hr className="border-t border-gray-700 mx-6 md:mx-10 mt-5" />{" "}
+      <hr className="border-t border-gray-500 mx-6 md:mx-10 mt-5" />{" "}
       {/* Divider */}
       <div className="text-text-light text-center px-6 pt-5">
         &copy; {currentYear} Lift Media. All Rights Reserved.

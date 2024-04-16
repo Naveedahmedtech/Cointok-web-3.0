@@ -46,11 +46,11 @@ const SwapItem = ({ buyTax = "0.00", saleTax = "0.00" }) => {
         <div className="flex justify-between my-5 px-5">
           <div className="flex flex-col">
             <p className="text-text-secondary">Sale Tax </p>
-            <p className="text-text-light">{saleTax} %</p>
+            <p className="text-text-light text-2xl font-bold">{saleTax} %</p>
           </div>
           <div className="flex flex-col">
             <p className="text-text-secondary">Buy Tax</p>
-            <p className="text-text-light">{buyTax} %</p>
+            <p className="text-text-light text-2xl font-bold">{buyTax} %</p>
           </div>
         </div>
       </div>

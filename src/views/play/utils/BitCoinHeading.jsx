@@ -8,7 +8,7 @@ import coin2 from "../../../assets/socials/coin-2.png";
 import StatsBadge from "./StatsBadge";
 import Tooltip from "../../../components/tooltip/Tooltip";
 
-const BitCoinHeading = () => {
+const BitCoinHeading = ({ details }) => {
   const [isCopied, setIsCopied] = useState(false);
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
@@ -22,7 +22,8 @@ const BitCoinHeading = () => {
     );
   };
 
-  const address = "0x4e1C1BD35397042319Fe252d2e324ad439B19f1e";
+  const address =
+    details?.contract_address || "0x4e1C1BD35397042319Fe252d2e324ad439B19f1e";
   const displayAddress = `${address.substring(0, 11)}........`;
 
   return (
@@ -66,8 +67,13 @@ const BitCoinHeading = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 md:items-end">
-        <StatsBadge icon={heartFill} count="42520" />
-        <p className="text-xs mt-2">Today's Vote: 952</p>
+        <StatsBadge
+          icon={heartFill}
+          count={details?.total_votes ? details?.total_votes : "250"}
+        />
+        <p className="text-xs mt-2">
+          Today's Vote: {details?.today_votes ? details?.today_votes : 952}
+        </p>
       </div>
     </div>
   );
