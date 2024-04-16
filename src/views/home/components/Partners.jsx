@@ -19,7 +19,7 @@ const Partners = () => {
         className="absolute left-[-80px] top-[-80px] h-64 z-[-9999999]"
       />
       <Text className="text-3xl lg:text-4xl font-bold text-text-light text-center my-5">
-        Partners
+        PARTNERS
       </Text>
       <div className="flex justify-center items-center flex-wrap gap-5 p-10 bg-secondary relative">
         {images.map((image, index) => (

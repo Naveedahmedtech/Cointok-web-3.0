@@ -38,6 +38,18 @@ export const apiSlice = createApi({
       query: () => "coin/new-listing",
       providesTags: ["NewListing"],
     }),
+    getPresaleListing: builder.query({
+      query: () => "coin/presale-listing",
+      providesTags: ["getPresaleListing"],
+    }),
+    getPromotedCoins: builder.query({
+      query: () => "promoted-coins",
+      providesTags: ["PromotedCoins"],
+    }),
+    getCoinDetails: builder.query({
+      query: ({ id }) => `coin/get-coin-by-Id/${id}`,
+      providesTags: ["getCoinDetails"],
+    }),
   }),
 });
 
@@ -47,4 +59,7 @@ export const {
   useAddCoinMutation,
   useGetAdvertiseQuery,
   useGetNewListingQuery,
+  useGetPromotedCoinsQuery,
+  useGetPresaleListingQuery,
+  useGetCoinDetailsQuery,
 } = apiSlice;

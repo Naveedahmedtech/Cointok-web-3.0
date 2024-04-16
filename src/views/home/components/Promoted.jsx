@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "../../../components/table/Table";
 import {
   ColoredNumber,
@@ -8,20 +8,20 @@ import {
 } from "./utils/promoted";
 import heartFill from "../../../assets/icons/heart-fill.png";
 import Text from "../../../components/text/Text";
-import Badge from "../../../components/badge/Badge";
 import { columns, dummyData } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
+import defaultIcon1 from "../../../assets/icons/default-icon1.png";
 
-const BestRecords = () => {
+
+const BestRecords = ({ coins=[] }) => {
   const navigate = useNavigate();
-
-  const dataRows = dummyData.map((item, index) => {
+  const dataRows = coins?.length > 0 && coins?.map((item, index) => {
     const rank = (index + 1).toString().padStart(2, "0");
     return [
       <tr
         key={index}
-        onClick={() => navigate(`play`)}
+        onClick={() => navigate(`play?id=${item.id}`)}
         className="cursor-pointer hover:opacity-70"
       >
         <td
@@ -32,25 +32,31 @@ const BestRecords = () => {
         <td
           className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
         >
-          <IconText icon={item.coins.icon} text={item.coins.name} />
+          <IconText
+            icon={item?.coin_picture || defaultIcon1}
+            text={item?.coin_name || "fgf"}
+          />
         </td>
-        <td className="text-text-info">{item.category}</td>
+        <td className="text-text-info">{item?.category}</td>
         <td className="text-text-light">
-          <IconText icon={item.blockchain.icon} text={item.blockchain.name} />
+          <IconText
+            icon={item?.blockchain?.icon || "No"}
+            text={item?.blockchain?.name || "No"}
+          />
         </td>
         <td className="text-text-light">
-          <ColoredNumber number={item.volume24H} />
+          <ColoredNumber number={item?.volume24H || "+00"} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item.marketCap} />
+          <FormatMarketCap value={item?.marketCap || "00"} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item.price} />
+          <FormatMarketCap value={item?.price || "00"} />
         </td>
-        <td className="text-text-light">{formatDate(item.launchDate)}</td>
-        <td className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2">
+        <td className="text-text-light">{formatDate(item?.launch_date)}</td>
+        <td className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md py-2">
           <img src={heartFill} alt="" />
-          <Text>{item.votes}</Text>
+          <Text>{item?.total_votes || "00"}</Text>
         </td>
       </tr>,
       <tr key={`spacer-${index}`} className="h-4"></tr>,
@@ -75,14 +81,16 @@ const BestRecords = () => {
       <Table
         header={
           <div className="flex items-center flex-wrap m-5 ">
-            <Text className="text-text-primary text-xl font-bold">Promoted</Text>
+            <Text className="text-text-primary text-xl font-bold">
+              Promoted
+            </Text>
           </div>
         }
         columns={columns.map((column) => ({
           ...column,
           title: renderColumnTitle(column),
         }))}
-        rowComponents={dataRows}
+        rowComponents={dataRows || []}
         pageSize={5}
         showPagination={false}
       />

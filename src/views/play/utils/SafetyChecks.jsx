@@ -1,37 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCheckCircle, FaTimesCircle, FaShieldAlt } from "react-icons/fa";
 import safty from "../../../assets/common/safty.png";
+import useWindowSize from "../../../hooks/useWindowSize";
+import { checksData } from "../../../utils/dummyData";
 
-const checksData = [
-  {
-    id: 1,
-    text: "Honeypot",
-    status: true,
-  },
-  {
-    id: 2,
-    text: "Mint",
-    status: false,
-  },
-  {
-    id: 3,
-    text: "Pause",
-    status: true,
-  },
-  {
-    id: 4,
-    text: "Firewall",
-    status: false,
-  },
-  {
-    id: 5,
-    text: "Encryption",
-    status: true,
-  },
-];
 
 const SafetyChecks = () => {
   const [showAll, setShowAll] = useState(false);
+  const windowSize = useWindowSize(); // Custom hook to get window size
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [windowSize]);
+
+  const visibleChecks = windowSize.width < 768 ? 1 : 5; // 768px is sm breakpoint in Tailwind
 
   return (
     <div className="bg-secondary border-2 border-[#323232] p-5 rounded-lg shadow-lg">
@@ -42,9 +24,9 @@ const SafetyChecks = () => {
         <img src={safty} alt="Safety" />
       </div>
       {checksData
-        .slice(0, showAll ? checksData.length : 1)
+        .slice(0, showAll ? checksData.length : visibleChecks)
         .map(({ id, text, status }) => (
-          <div key={id} className="flex items-center justify-between mb-4">
+          <div key={id} className="flex items-center justify-between mb-5">
             <div className="flex items-center">
               <FaShieldAlt className="text-xl text-text-light mr-2" />
               <span className="flex-1 text-text-light text-sm">{text}</span>
@@ -62,24 +44,23 @@ const SafetyChecks = () => {
             )}
           </div>
         ))}
-      {!showAll && (
+      {!showAll ? (
         <p
-          className="border-t border-[#323232] text-text-light px-4 py-2 text-center rounded mt-4 block md:hidden"
+          className="border-t border-[#323232] text-text-light px-4 py-2 text-center rounded mt-4 cursor-pointer block md:hidden"
           onClick={() => setShowAll(true)}
         >
-          <p className="border-2 border-text-primary rounded-full inline-block px-5 py-2">
+          <span className="border-2 border-text-primary rounded-full inline-block px-5 py-2">
             Show more
-          </p>
+          </span>
         </p>
-      )}
-      {showAll && (
+      ) : (
         <p
-          className="border-t border-[#323232] text-text-light px-4 py-2 text-center rounded mt-4  block md:hidden"
+          className="border-t border-[#323232] text-text-light px-4 py-2 text-center rounded mt-4 cursor-pointer block md:hidden"
           onClick={() => setShowAll(false)}
         >
-          <p className="border-2 border-text-primary rounded-full inline-block px-5 py-2">
+          <span className="border-2 border-text-primary rounded-full inline-block px-5 py-2">
             Show less
-          </p>
+          </span>
         </p>
       )}
     </div>

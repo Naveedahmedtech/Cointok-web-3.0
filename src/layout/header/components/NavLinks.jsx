@@ -15,7 +15,7 @@ const NavLinks = () => {
         <img
           src={rightFillIcon}
           alt="Right Fill Icon"
-          className="w-6 h-6 mr-1"
+          className="w-8 h-8 mr-1"
         />
         Play WOTF
       </Link>

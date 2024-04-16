@@ -11,7 +11,7 @@ const Banner = ({ image }) => {
         <Text className="text-text-light font-bold text-center md:text-left md:max-w-[400px] mb-6 lg:mb-0 md:mr-10 md:text-xl">
           #1 Platform to discover newest coins!
         </Text>
-        <div className="max-w-full md:max-w-[700px]">
+        <div className="max-w-full md:max-w-[900px]">
           <img
             src={displayImage}
             alt="Banner 1"

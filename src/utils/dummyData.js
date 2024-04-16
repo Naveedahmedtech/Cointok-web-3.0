@@ -3,7 +3,7 @@ import defaultIcon1 from "../assets/icons/default-icon1.png";
 
 export const columns = [
   { key: "rank", title: "Rank" },
-  { key: "coins", title: "Coins" },
+  { key: "coin", title: "Coin" },
   { key: "category", title: "Category" },
   { key: "blockchain", title: "Blockchain" },
   { key: "volume24H", title: "24H Volume ", icon: "↓", color: "#FF0000" },
@@ -12,7 +12,43 @@ export const columns = [
   { key: "launchDate", title: "Launch Date", icon: "↓" },
   { key: "votes", title: "Votes", icon: "↓" },
 ];
+export const defaultDescription = `DESCRIPTION GigaChadGPT ($GIGA) is the ultimate fusion of GigaChad, an
+          internet legend, and Artificial Intelligence. This token takes the
+          alpha energy of GigaChad and combines it with powerful AI
+          capabilities. The result is an unstoppable force of chadness and
+          intelligence. It's like having the brain of a genius and the body of a
+          Greek god. If you're tired of being a weakling and want to join the
+          ranks of the alphas, then investing in GigaChadGPT might be your
+          ticket to success. So, strap on your big boy pants, grab your wallets
+          and get ready to become a true alpha by investing in GigaChadGPT.`
 
+export const checksData = [
+  {
+    id: 1,
+    text: "Honeypot",
+    status: true,
+  },
+  {
+    id: 2,
+    text: "Mint",
+    status: false,
+  },
+  {
+    id: 3,
+    text: "Pause",
+    status: true,
+  },
+  {
+    id: 4,
+    text: "Firewall",
+    status: false,
+  },
+  {
+    id: 5,
+    text: "Encryption",
+    status: true,
+  },
+];
 export const dummyData = [
   {
     id: 1,
