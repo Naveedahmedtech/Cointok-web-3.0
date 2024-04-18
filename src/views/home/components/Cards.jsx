@@ -59,8 +59,8 @@ const Cards = ({ newListing, presaleListing }) => {
   return (
     <div className="flex  justify-between flex-wrap gap-10 my-10">
       <CardComponent title="New Listing" data={newListing} />
-      <CardComponent title="Top Trending" data={presaleListing} />
-      <CardComponent title="Upcoming Presale" data={featuredData} />
+      <CardComponent title="Top Trending" data={featuredData} />
+      <CardComponent title="Upcoming Presale" data={presaleListing} />
     </div>
   );
 };
@@ -94,13 +94,13 @@ const CardComponent = ({ title, data }) => {
                 {item?.coin_name || "N/A"}
               </Text>
               <Text className="text-text-secondary">
-                {item?.subtitle || "Sub"}
+                {item?.coin_symbol || "Sub"}
               </Text>
             </div>
           </div>
           <div className="flex">
             <Text className="text-text-secondary mr-0 md:mr-5">
-              {item?.duration || "4 hours ago"}
+              {item?.date || "4 hours ago"}
             </Text>
             <img src={rightIcon} alt="" className="w-auto h-6" />
           </div>

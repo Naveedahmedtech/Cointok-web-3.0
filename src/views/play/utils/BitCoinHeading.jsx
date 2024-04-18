@@ -29,10 +29,14 @@ const BitCoinHeading = ({ details }) => {
   return (
     <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5">
       <div className="flex items-center space-x-2 mb-4">
-        <img src={binance} alt="" className="w-8 h-8 md:w-16 md:h-16" />
+        <img
+          src={details?.coin_picture || binance}
+          alt=""
+          className="w-8 h-8 md:w-16 md:h-16"
+        />
         <div className="flex  flex-col md:space-x-4">
           <div>
-            <p>Binance Smart Chain</p>
+            <p>{details?.coin_name}</p>
           </div>
           <div>
             <Tooltip content={isCopied ? "Copied!" : address}>

@@ -50,6 +50,14 @@ export const apiSlice = createApi({
       query: ({ id }) => `coin/get-coin-by-Id/${id}`,
       providesTags: ["getCoinDetails"],
     }),
+    getTodayBest: builder.query({
+      query: () => `coin/todays-best`,
+      providesTags: ["getTodayBest"],
+    }),
+    getAllTimeBest: builder.query({
+      query: () => `coin/all-time-best`,
+      providesTags: ["getAllTimeBest"],
+    }),
   }),
 });
 
@@ -62,4 +70,6 @@ export const {
   useGetPromotedCoinsQuery,
   useGetPresaleListingQuery,
   useGetCoinDetailsQuery,
+  useGetTodayBestQuery,
+  useGetAllTimeBestQuery,
 } = apiSlice;

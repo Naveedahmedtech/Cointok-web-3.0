@@ -21,7 +21,7 @@ const BestRecords = ({ coins=[] }) => {
     return [
       <tr
         key={index}
-        onClick={() => navigate(`play?id=${item.id}`)}
+        onClick={() => navigate(`/play?id=${item.id}`)}
         className="cursor-pointer hover:opacity-70"
       >
         <td
@@ -37,7 +37,7 @@ const BestRecords = ({ coins=[] }) => {
             text={item?.coin_name || "fgf"}
           />
         </td>
-        <td className="text-text-info">{item?.category}</td>
+        <td className="text-text-info">{item?.category || "Category"}</td>
         <td className="text-text-light">
           <IconText
             icon={item?.blockchain?.icon || "No"}
