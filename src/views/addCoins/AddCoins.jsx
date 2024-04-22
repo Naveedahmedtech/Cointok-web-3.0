@@ -62,7 +62,7 @@ const AddCoins = () => {
     let isValid = true;
 
     // Fields expected to be strings
-    const requiredFields = [
+    const requiredFields = [ 
       "coin_name",
       "coin_symbol",
       "listing_platform_id",
