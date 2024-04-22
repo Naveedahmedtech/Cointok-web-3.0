@@ -29,10 +29,18 @@ const BitCoinHeading = ({ details }) => {
   return (
     <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5">
       <div className="flex items-center space-x-2 mb-4">
-        <img src={binance} alt="" className="w-8 h-8 md:w-16 md:h-16" />
+        <img
+          src={details?.coin_picture || binance}
+          alt=""
+          className="w-8 h-8 md:w-16 md:h-16"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = binance;
+          }}
+        />
         <div className="flex  flex-col md:space-x-4">
           <div>
-            <p>Binance Smart Chain</p>
+            <p>{details?.coin_name}</p>
           </div>
           <div>
             <Tooltip content={isCopied ? "Copied!" : address}>
@@ -72,7 +80,7 @@ const BitCoinHeading = ({ details }) => {
           count={details?.total_votes ? details?.total_votes : "250"}
         />
         <p className="text-xs mt-2">
-          Today's Vote: {details?.today_votes ? details?.today_votes : 952}
+          Today's Vote: {details?.today_votes ? details?.today_votes : 0}
         </p>
       </div>
     </div>

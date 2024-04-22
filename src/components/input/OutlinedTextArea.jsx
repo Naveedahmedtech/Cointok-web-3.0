@@ -8,7 +8,8 @@ const OutlinedTextArea = ({
   rows = 3, // Default number of rows
   defaultValue = "",
   onChange,
-  error
+  error,
+  value
 }) => {
   return (
     <div className="flex flex-col">
@@ -29,7 +30,7 @@ const OutlinedTextArea = ({
           rows={rows}
           className="w-full bg-transparent p-1 text-sm focus:outline-none appearance-none resize-none text-text-light"
           required={required}
-          defaultValue={defaultValue}
+          defaultValue={value}
           placeholder={placeholder}
           onChange={onChange}
         ></textarea>

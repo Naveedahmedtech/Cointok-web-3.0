@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 const Table = ({
   header,
   columns,
-  rowComponents,
+  rowComponents = [],
   pageSize,
   showPagination,
 }) => {

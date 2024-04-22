@@ -3,7 +3,20 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
-  tagTypes: ["Category", "Platforms", "CoinStore"],
+  tagTypes: [
+    "Category",
+    "Platforms",
+    "CoinStore",
+    "getTodayBest",
+    "getAllTimeBest",
+    "PromotedCoins",
+    "Advertise",
+    "NewListing",
+    "getPresaleListing",
+    "getTopTrending",
+    "getCoinDetails",
+    "getChains",
+  ],
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => "categories",
@@ -28,7 +41,29 @@ export const apiSlice = createApi({
           },
         };
       },
-      invalidateTags: ["CoinStore"],
+      invalidateTags: [
+        "CoinStore",
+        "PromotedCoins",
+        "getTodayBest",
+        "getAllTimeBest",
+      ],
+    }),
+    addVote: builder.mutation({
+      query: ({ id }) => {
+        return {
+          url: `coins/${id}/add-vote`,
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+          },
+        };
+      },
+      invalidateTags: [
+        "addVote",
+        "PromotedCoins",
+        "getTodayBest",
+        "getAllTimeBest",
+      ],
     }),
     getAdvertise: builder.query({
       query: () => "advertise",
@@ -42,6 +77,10 @@ export const apiSlice = createApi({
       query: () => "coin/presale-listing",
       providesTags: ["getPresaleListing"],
     }),
+    getTopTrending: builder.query({
+      query: () => "coin/top-trending",
+      providesTags: ["getTopTrending"],
+    }),
     getPromotedCoins: builder.query({
       query: () => "promoted-coins",
       providesTags: ["PromotedCoins"],
@@ -49,6 +88,18 @@ export const apiSlice = createApi({
     getCoinDetails: builder.query({
       query: ({ id }) => `coin/get-coin-by-Id/${id}`,
       providesTags: ["getCoinDetails"],
+    }),
+    getTodayBest: builder.query({
+      query: () => `coin/todays-best`,
+      providesTags: ["getTodayBest"],
+    }),
+    getAllTimeBest: builder.query({
+      query: () => `coin/all-time-best`,
+      providesTags: ["getAllTimeBest"],
+    }),
+    getChains: builder.query({
+      query: () => `chains`,
+      providesTags: ["getChains"],
     }),
   }),
 });
@@ -62,4 +113,9 @@ export const {
   useGetPromotedCoinsQuery,
   useGetPresaleListingQuery,
   useGetCoinDetailsQuery,
+  useGetTodayBestQuery,
+  useGetAllTimeBestQuery,
+  useGetTopTrendingQuery,
+  useAddVoteMutation,
+  useGetChainsQuery,
 } = apiSlice;

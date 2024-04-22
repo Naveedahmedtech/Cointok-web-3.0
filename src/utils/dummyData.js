@@ -1,6 +1,5 @@
 import defaultIcon1 from "../assets/icons/default-icon1.png";
 
-
 export const columns = [
   { key: "rank", title: "Rank" },
   { key: "coin", title: "Coin" },
@@ -20,7 +19,7 @@ export const defaultDescription = `DESCRIPTION GigaChadGPT ($GIGA) is the ultima
           Greek god. If you're tired of being a weakling and want to join the
           ranks of the alphas, then investing in GigaChadGPT might be your
           ticket to success. So, strap on your big boy pants, grab your wallets
-          and get ready to become a true alpha by investing in GigaChadGPT.`
+          and get ready to become a true alpha by investing in GigaChadGPT.`;
 
 export const checksData = [
   {
@@ -47,6 +46,57 @@ export const checksData = [
     id: 5,
     text: "Encryption",
     status: true,
+  },
+];
+
+export const newListingData = [
+  {
+    id: 1,
+    title: "Some title",
+    subtitle: "Some subtitle",
+    duration: "4 hour ago",
+    icon: defaultIcon1,
+  },
+  {
+    id: 1,
+    title: "Some title",
+    subtitle: "Some subtitle",
+    duration: "4 hour ago",
+    icon: defaultIcon1,
+  },
+];
+
+export const popularData = [
+  {
+    id: 1,
+    title: "Popular title",
+    subtitle: "Popular subtitle",
+    duration: "1 day ago",
+    icon: defaultIcon1,
+  },
+  {
+    id: 1,
+    title: "Some title",
+    subtitle: "Some subtitle",
+    duration: "4 hour ago",
+    icon: defaultIcon1,
+  },
+];
+
+export const featuredData = [
+  {
+    id: 1,
+    title: "Featured title",
+    subtitle: "Featured subtitle",
+    duration: "2 days ago",
+    icon: defaultIcon1,
+  },
+  {
+    id: 1,
+    title: "Top Trending",
+    subtitle: "Some subtitle",
+    duration: "4 hour ago",
+    icon: defaultIcon1,
   },
 ];
 export const dummyData = [
