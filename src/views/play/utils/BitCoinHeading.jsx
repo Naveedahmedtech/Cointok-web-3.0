@@ -33,6 +33,10 @@ const BitCoinHeading = ({ details }) => {
           src={details?.coin_picture || binance}
           alt=""
           className="w-8 h-8 md:w-16 md:h-16"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = binance;
+          }}
         />
         <div className="flex  flex-col md:space-x-4">
           <div>
@@ -76,7 +80,7 @@ const BitCoinHeading = ({ details }) => {
           count={details?.total_votes ? details?.total_votes : "250"}
         />
         <p className="text-xs mt-2">
-          Today's Vote: {details?.today_votes ? details?.today_votes : 952}
+          Today's Vote: {details?.today_votes ? details?.today_votes : 0}
         </p>
       </div>
     </div>

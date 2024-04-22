@@ -12,6 +12,7 @@ const FormFields = ({
   handleSubmit,
   categories,
   platforms,
+  chains,
   isLoading,
   formData,
 }) => {
@@ -38,14 +39,15 @@ const FormFields = ({
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        <OutlinedInput
-          id="network"
-          label="Network/Chain"
-          placeholder="Network Chain"
-          required
+        <OutlinedDropdown
+          id="chain_id"
+          label="Network Chain"
+          options={chains}
+          required={true}
+          defaultValue="Please select..."
           onChange={handleChange}
-          error={errors.network}
-          value={formData.network}
+          error={errors.chain_id}
+          value={formData.chain_id}
         />
         <OutlinedDatePicker
           id="launch_date"

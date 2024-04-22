@@ -13,6 +13,7 @@ import { columns, dummyData } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
 import {
+  useAddVoteMutation,
   useGetAllTimeBestQuery,
   useGetTodayBestQuery,
 } from "../../../app/features/api";
@@ -20,17 +21,23 @@ import {
 const BestRecords = () => {
   const navigate = useNavigate();
   const [currentData, setCurrentData] = useState([]);
+  const [votingStatus, setVotingStatus] = useState({});
   const [active, setActive] = useState("today"); // Track which button is active
+  const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
 
   const {
     data: todayBest,
     error: todayBestError,
     isLoading: todayBestLoading,
+    refetch: todayBestRefetch,
+    isFetching: todayBestFetching,
   } = useGetTodayBestQuery();
   const {
     data: allTimeBest,
     error: allTimeBestError,
     isLoading: allTimeBestLoading,
+    refetch: allTimeBestRefetch,
+    isFetching: allTimeBestFetching,
   } = useGetAllTimeBestQuery();
 
   useEffect(() => {
@@ -63,6 +70,32 @@ const BestRecords = () => {
     }`;
   };
 
+  const handleVote = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!votingStatus[id]) {
+      // Check if this particular ID is not already processing a vote
+      setVotingStatus((prev) => ({ ...prev, [id]: true })); // Set voting to true for this ID
+
+      addVoteMutation({ id })
+        .unwrap()
+        .then((data) => {
+          console.log("Vote added successfully:", data);
+          todayBestRefetch();
+          allTimeBestRefetch();
+        })
+        .catch((error) => {
+          console.error("Failed to add vote:", error);
+          toast.error(error?.data?.message || "Error voting", {
+            position: "top-center",
+          });
+        })
+        .finally(() => {
+          setVotingStatus((prev) => ({ ...prev, [id]: false })); // Reset voting status for this ID
+        });
+    }
+  };
+
   const dataRows = currentData?.coins?.map((item, index) => {
     const rank = (index + 1).toString().padStart(2, "0");
     return [
@@ -79,29 +112,36 @@ const BestRecords = () => {
         >
           <IconText
             icon={item?.coin_picture || heartFill}
-            text={item?.coin_name || "Name"}
+            text={item?.category_name || "Name"}
           />
         </td>
         <td className="text-text-info">{item?.category || "Category"}</td>
         <td className="text-text-light">
           <IconText
             icon={item?.blockchain?.icon || heartFill}
-            text={item?.coin_symbol || "Name"}
+            text={item?.chain_name || "Name"}
           />
         </td>
         <td className="text-text-light">
-          <ColoredNumber number={item?.volume24H || 245} />
+          <ColoredNumber number={item?.volume24H || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.marketCap || 25} />
+          <FormatMarketCap value={item?.marketCap || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.price || 56} />
+          <FormatMarketCap value={item?.price || 0} />
         </td>
         <td className="text-text-light">{formatDate(item?.launch_date)}</td>
-        <td className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2">
+        <td
+          className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2"
+          onClick={(e) => handleVote(e, item.id)}
+        >
           <img src={heartFill} alt="" />
-          <Text>{item?.total_votes || 1}</Text>
+          {votingStatus[item.id] ? (
+            <Text>Voting..</Text>
+          ) : (
+            <Text>{item.total_votes || 0}</Text>
+          )}
         </td>
       </tr>,
       <tr key={`spacer-${index}`} className="h-4"></tr>,

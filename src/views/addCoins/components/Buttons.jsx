@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Buttons.css";
 
-const Buttons = ({ onButtonClick, error, value }) => {
+const Buttons = ({ onButtonClick, error, value, isPresale }) => {
   const [clickedButton, setClickedButton] = useState(null);
 
   const handleButtonClick = (buttonName) => {
