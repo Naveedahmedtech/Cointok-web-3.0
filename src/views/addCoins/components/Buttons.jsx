@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Buttons.css";
 
-const Buttons = ({ onButtonClick, error, value, isPresale }) => {
-  const [clickedButton, setClickedButton] = useState(null);
+const Buttons = ({ onButtonClick, error, value }) => {
+  const [clickedButton, setClickedButton] = useState(value || "fair_launch");
+  useEffect(() => {
+    if (!value) {
+      setClickedButton("fair_launch");
+    }
+  }, [value]);
 
   const handleButtonClick = (buttonName) => {
-    setClickedButton(buttonName === clickedButton ? null : buttonName);
-    onButtonClick(buttonName);
+    if (buttonName !== clickedButton) {
+      setClickedButton(buttonName);
+      onButtonClick(buttonName);
+    }
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex justify-center items-center flex-wrap md:flex-nowrap w-full">
+    <div className="flex flex-col wrapper">
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gradient-border w-full">
         <p
           className={`gradient-button ${
             clickedButton === "fair_launch" ? "bg-gradient" : "border-gradient"

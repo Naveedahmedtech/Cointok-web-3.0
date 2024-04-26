@@ -29,7 +29,7 @@ const UploadImage = ({ onImageUpload, error, resetKey }) => {
   };
 
   return (
-    <div className="flex flex-col flex-grow lg:max-w-[320px]">
+    <div className="flex flex-col flex-grow lg:max-w-[350px]">
       <div
         className={`bg-secondary border-2 border-border-secondary px-4 sm:px-10 py-5 rounded-lg flex-grow-0 md:flex-grow lg:flex-grow-0 md:min-w-[280px] mb-5 ${
           imageError || error ? "border-rose-700" : "border-border-secondary"
@@ -89,9 +89,12 @@ const UploadImage = ({ onImageUpload, error, resetKey }) => {
         )}
         {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       </div>
+      <div className="self-center">
       <PromoteCoinButton />
+      </div>
     </div>
   );
 };
 
 export default UploadImage;
+

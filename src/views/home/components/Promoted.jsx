@@ -109,7 +109,7 @@ const BestRecords = ({ coins = [], refetch }) => {
       <Table
         header={
           <div className="flex items-center flex-wrap m-5 ">
-            <Text className="text-text-primary text-xl font-bold">
+            <Text className="text-text-primary text-2xl font-bold">
               Promoted
             </Text>
           </div>

@@ -65,7 +65,7 @@ const BestRecords = () => {
   };
 
   const buttonClass = (button) => {
-    return `px-4 py-2 rounded-full text-text-light text-lg cursor-pointer ${
+    return `px-2 md:px-4 py-2 rounded-full text-text-light text-sm md:text-lg cursor-pointer ${
       active === button ? "bg-[#343434]" : ""
     }`;
   };
@@ -123,13 +123,13 @@ const BestRecords = () => {
           />
         </td>
         <td className="text-text-light">
-          <ColoredNumber number={item?.volume24H || 0} />
+          <ColoredNumber number={item?.priceUsd24hAgo || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.marketCap || 0} />
+          <FormatMarketCap value={item?.marketCapUsd || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.price || 0} />
+          <FormatMarketCap value={item?.priceUsd || 0} />
         </td>
         <td className="text-text-light">{formatDate(item?.launch_date)}</td>
         <td
@@ -165,7 +165,7 @@ const BestRecords = () => {
       />
       <Table
         header={
-          <div className="flex items-center flex-wrap m-5 gap-3">
+          <div className="flex items-center flex-wrap m-5 md:gap-3">
             <span
               className={buttonClass("today")}
               onClick={handleFetchTodayBest}

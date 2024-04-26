@@ -1,0 +1,4 @@
+.button-gradient {
+background: rgb(173, 0, 255);
+    background: linear-gradient(90deg, rgba(173, 0, 255, 1) -80%, rgba(0, 240, 255, 1) 93%);
+}

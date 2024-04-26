@@ -13,11 +13,11 @@ const OutlinedInput = ({
       <div
         className={`relative border-2 ${
           error ? "border-red-500" : "border-border-secondary"
-        } rounded-md p-2 mt-2`}
+        } rounded-md p-3 mt-2`}
       >
         <label
           htmlFor={id}
-          className="absolute text-text-light bg-secondary px-1"
+          className="absolute text-text-light bg-secondary px-1 font-bold"
           style={{ top: "-10px", left: "10px", fontSize: "0.875rem" }}
         >
           {label} {required && <span className="text-red-500">*</span>}
