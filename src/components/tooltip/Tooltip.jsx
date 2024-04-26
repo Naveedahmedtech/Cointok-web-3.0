@@ -12,7 +12,7 @@ const Tooltip = ({ children, content, ...props }) => {
     >
       {children}
       {isVisible && (
-        <div className="absolute bottom-full mb-2 px-3 py-1 bg-black text-white text-sm rounded">
+        <div className="absolute bottom-full mb-2 px-3 py-1 bg-black text-white text-sm rounded z-10">
           {content}
         </div>
       )}

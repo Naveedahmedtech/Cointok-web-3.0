@@ -123,13 +123,13 @@ const BestRecords = () => {
           />
         </td>
         <td className="text-text-light">
-          <ColoredNumber number={item?.volume24H || 0} />
+          <ColoredNumber number={item?.priceUsd24hAgo || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.marketCap || 0} />
+          <FormatMarketCap value={item?.marketCapUsd || 0} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item?.price || 0} />
+          <FormatMarketCap value={item?.priceUsd || 0} />
         </td>
         <td className="text-text-light">{formatDate(item?.launch_date)}</td>
         <td

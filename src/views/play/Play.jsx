@@ -13,11 +13,9 @@ const Play = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const id = searchParams.get("id");
-  console.log(id);
   const { data: promotedCoins } = useGetPromotedCoinsQuery();
   const { data: coinsDetails } = useGetCoinDetailsQuery({ id: id });
 
-  console.log("Coin", coinsDetails);
 
   const coins = promotedCoins?.all_coins;
   return (

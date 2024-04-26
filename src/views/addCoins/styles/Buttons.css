@@ -1,16 +1,27 @@
 .gradient-button {
     position: relative;
     color: #FFFFFF;
-    padding: 8px 16px;
+    padding: 16px 16px;
     border: none;
     cursor: pointer;
     transition: color 0.4s, background-color 0.4s;
     overflow: hidden;
-    border: 1px solid;
+    display: block;
+}
+
+.gradient-border {
+    border: 1px solid transparent;
+    border-image: linear-gradient(90deg,
+            hsl(281deg 100% 50%) 0%,
+            hsl(198deg 100% 50%) 50%,
+            hsl(184deg 100% 50%) 100%);
     border-image-slice: 1;
-    border-image-source: linear-gradient(to right, #743ad5, #d53a9d);
 }
 
 .bg-gradient {
-    background-image: linear-gradient(to right, #6a0dad, #892ece, #00d4ff);
+
+    background-image: linear-gradient(90deg,
+            hsl(281deg 100% 50%) 0%,
+            hsl(198deg 100% 50%) 50%,
+            hsl(184deg 100% 50%) 100%);
 }

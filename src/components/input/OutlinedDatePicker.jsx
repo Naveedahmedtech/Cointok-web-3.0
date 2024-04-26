@@ -28,10 +28,10 @@ const OutlinedDatePicker = ({
 
   return (
     <div className="flex flex-col">
-      <div className={`relative border-2 border-border-secondary rounded-md p-2 text-text-light ${
+      <div className={`relative border-2 border-border-secondary rounded-md mt-2 p-[14px] text-text-light ${
           error ? "border-red-500" : "border-border-secondary"
         }`}>
-        <label htmlFor={id} className="absolute -top-3 left-2 px-1 text-sm">
+        <label htmlFor={id} className="absolute -top-3 left-2 px-1 text-sm font-bold">
           {label}
           {required && <span className="text-red-500">*</span>}
         </label>

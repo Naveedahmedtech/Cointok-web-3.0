@@ -34,7 +34,7 @@ const CardComponent = ({ title, data }) => {
               <img
                 src={item?.coin_picture}
                 alt=""
-                className="w-auto h-12 mr-0 md:mr-5"
+                className="w-12 h-12 mr-0 md:mr-5 rounded-full"
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
                   currentTarget.src = defaultIcon1;
@@ -58,7 +58,7 @@ const CardComponent = ({ title, data }) => {
           </Link>
         ))
       ) : (
-        <div className="text-center">No Records Available</div>
+        <div className="text-center text-white">No Records Available</div>
       )}
     </div>
   );
