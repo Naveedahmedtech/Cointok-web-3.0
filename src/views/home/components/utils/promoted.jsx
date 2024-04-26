@@ -5,7 +5,7 @@ export const IconText = ({ icon, text }) => (
     <img
       src={icon}
       alt=""
-      className="w-8 h-8 mr-2"
+      className="w-8 h-8 mr-2 rounded-full"
       onError={({ currentTarget }) => {
         currentTarget.onerror = null;
         currentTarget.src = defaultIcon1;

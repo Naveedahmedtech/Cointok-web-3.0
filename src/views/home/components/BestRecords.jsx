@@ -65,7 +65,7 @@ const BestRecords = () => {
   };
 
   const buttonClass = (button) => {
-    return `px-4 py-2 rounded-full text-text-light text-lg cursor-pointer ${
+    return `px-2 md:px-4 py-2 rounded-full text-text-light text-sm md:text-lg cursor-pointer ${
       active === button ? "bg-[#343434]" : ""
     }`;
   };
@@ -165,7 +165,7 @@ const BestRecords = () => {
       />
       <Table
         header={
-          <div className="flex items-center flex-wrap m-5 gap-3">
+          <div className="flex items-center flex-wrap m-5 md:gap-3">
             <span
               className={buttonClass("today")}
               onClick={handleFetchTodayBest}
