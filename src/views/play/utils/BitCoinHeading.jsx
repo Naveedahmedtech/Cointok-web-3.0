@@ -7,8 +7,30 @@ import coin1 from "../../../assets/socials/coin-1.png";
 import coin2 from "../../../assets/socials/coin-2.png";
 import StatsBadge from "./StatsBadge";
 import Tooltip from "../../../components/tooltip/Tooltip";
-const BitCoinHeading = ({ details }) => {
+import { useAddVoteMutation } from "../../../app/features/api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+const BitCoinHeading = ({ details, refetch, status }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
+  const navigate = useNavigate();
+  const id = details?.id;
+
+  console.log("refetch", refetch);
+  const handleVote = () => {
+    addVoteMutation({ id })
+      .unwrap()
+      .then((data) => {
+        console.log("Vote added successfully:", data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Failed to add vote:", error);
+        toast.error(error?.data?.message || "Error voting", {
+          position: "top-center",
+        });
+      });
+  };
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
       () => {
@@ -25,7 +47,7 @@ const BitCoinHeading = ({ details }) => {
     details?.contract_address || "0x4e1C1BD35397042319Fe252d2e324ad439B19f1e";
   const displayAddress = `${address.substring(0, 11)}........`;
 
-  const voteCount = details?.total_votes ? details?.total_votes : "250";
+  const voteCount = details?.total_votes ? details?.total_votes : 0;
   const voteTooltip = details?.total_votes > 250 ? details?.total_votes : "";
   const IsCoinAvailable = () => {
     if (details?.coin_market_cap_link) {
@@ -84,18 +106,25 @@ const BitCoinHeading = ({ details }) => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-2 md:items-end">
-        <div className="relative">
+        <div className="relative" onClick={handleVote}>
           {details?.total_votes > 250 && (
             <div className="absolute bg-gray-800 text-white py-1 px-2 rounded-md text-xs z-10 bottom-8 left-0 opacity-0 transition-opacity duration-200">
               {details?.total_votes}
             </div>
           )}
           <div
-            className="text-text-light border-2 border-text-primary flex items-center justify-around flex-wrap rounded-md p-2 w-28 cursor-pointer"
-            onClick={() => copyToClipboard(voteTooltip)}
+            className={`text-text-light border-2 border-text-primary flex items-center justify-around flex-wrap rounded-md p-2 w-28 cursor-pointer ${
+              isVoting ? "opacity-50" : ""
+            }`}
           >
-            <img src={heartFill} alt="" className="me-2" />
-            <p>{voteCount}</p>
+            {isVoting ? (
+              <p>Voting...</p>
+            ) : (
+              <>
+                <img src={heartFill} alt="" className="me-2" />
+                <p>{voteCount}</p>
+              </>
+            )}
           </div>
         </div>
         <p className="text-xs text-center self-center">

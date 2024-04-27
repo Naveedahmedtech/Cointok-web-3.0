@@ -2,7 +2,7 @@ import React from "react";
 import "./styles/addSwap.css";
 import Badge from "../../../components/badge/Badge";
 
-const AddSwapItem = ({ image, platform, subtitle, buttonText }) => {
+const AddSwapItem = ({ image, platform, recommended, add, link, buttonText }) => {
   return (
     <div className="bg-secondary border-b border-[#323232] flex justify-between items-center rounded-lg my-3 py-4 px-1 md:px-5">
       <div className="flex items-center space-x-1">
@@ -12,23 +12,30 @@ const AddSwapItem = ({ image, platform, subtitle, buttonText }) => {
             Your Swap Address
           </p>
           <div className="flex gap-1 flex-wrap">
-            <span
-              className={` bg-[#b700ff48] text-text-primary rounded-lg py-1 px-2 text-sm`}
-            >
-              add
-            </span>
-            <span
-              className={` bg-[#343434] text-text-light rounded-lg py-1 px-2 text-sm`}
-            >
-              recommended
-            </span>
+            {add && (
+              <span
+                className={` bg-[#b700ff48] text-text-primary rounded-lg py-1 px-2 text-sm`}
+              >
+                add
+              </span>
+            )}{" "}
+            {recommended && (
+              <span
+                className={` bg-[#343434] text-text-light rounded-lg py-1 px-2 text-sm`}
+              >
+                recommended
+              </span>
+            )}
           </div>
         </div>
       </div>
       <div>
-        <button className=" hover:opacity-75 text-text-light font-bold py-3 px-6 md:px-8 rounded-lg transition-opacity duration-150 text-xs md:text-sm button-gradient ">
+        <a
+          href={link}
+          className=" hover:opacity-75 text-text-light font-bold py-3 px-6 md:px-8 rounded-lg transition-opacity duration-150 text-xs md:text-sm button-gradient "
+        >
           {buttonText}
-        </button>
+        </a>
       </div>
     </div>
   );

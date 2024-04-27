@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SwapImageItems from "./SwapImageItems"; 
+import SwapImageItems from "./SwapImageItems";
 import logoIcon from "../../../assets/icons/default-icon2.png";
 import stats from "../../../assets/stats.png";
 import AddSwapItem from "./AddSwapItem";
@@ -13,17 +13,18 @@ const swapData = [
     buttonText: "Buy",
   },
 ];
-const swapAddData =
-  {
-    id: 1,
-    platform: "Platform A",
-    image: logoIcon,
-    subtitle: "Swap",
-    buttonText: "Buy",
-  }
+const swapAddData = {
+  id: 1,
+  platform: "Platform A",
+  image: logoIcon,
+  subtitle: "Swap",
+  buttonText: "Buy",
+  recommended: true,
+  add: true,
+  link: "https://www.google.com"
+};
 
-
-const SwapItem = ({ details, buyTax = "0.00", saleTax = "0.00" }) => {
+const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -33,13 +34,16 @@ const SwapItem = ({ details, buyTax = "0.00", saleTax = "0.00" }) => {
   const platform_name = details?.presale_platform_name
     ? details.presale_platform_name
     : details?.listingPlatform_name;
-  
+
+  const platform_image = details?.presale_picture
+    ? details.presale_picture
+    : details?.listing_picture;
+
   const platform_link = details?.presale_link
     ? details.presale_link
     : details?.listing_link;
-  
+
   const path = `${platform_link}?contact=${details?.contract_address}`;
-  
 
   return (
     <div className="bg-secondary border-b border-[#323232] mt-10 rounded-lg">
@@ -47,18 +51,20 @@ const SwapItem = ({ details, buyTax = "0.00", saleTax = "0.00" }) => {
       <SwapImageItems
         key={"id"}
         platform={platform_name}
-        image={logoIcon}
+        image={platform_image || logoIcon}
         subtitle={"subtitle"}
         buttonText={"Buy"}
         path={path}
       />
       {/* ))} */}
       <AddSwapItem
-        key={swapAddData.id}
-        platform={swapAddData.platform}
-        image={swapAddData.image}
-        subtitle={swapAddData.subtitle}
-        buttonText={swapAddData.buttonText}
+        key={adds?.id || swapAddData.id}
+        platform={adds?.name || swapAddData.platform}
+        image={adds?.picture || swapAddData.image}
+        recommended={adds?.recommended || swapAddData.recommended}
+        add={adds?.add || swapAddData.add}
+        link={adds?.link || swapAddData.link}
+        buttonText={"Buy"}
       />
       <div className="mt-10">
         <div className="flex justify-center items-center mb-1">
