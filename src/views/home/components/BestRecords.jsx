@@ -11,6 +11,7 @@ import Text from "../../../components/text/Text";
 import Badge from "../../../components/badge/Badge";
 import { columns, dummyData } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
+import fire from "../../../assets/icons/fire.png";
 import { useNavigate } from "react-router-dom";
 import {
   useAddVoteMutation,
@@ -74,8 +75,7 @@ const BestRecords = () => {
     e.preventDefault();
     e.stopPropagation();
     if (!votingStatus[id]) {
-      // Check if this particular ID is not already processing a vote
-      setVotingStatus((prev) => ({ ...prev, [id]: true })); // Set voting to true for this ID
+      setVotingStatus((prev) => ({ ...prev, [id]: true })); 
 
       addVoteMutation({ id })
         .unwrap()
@@ -91,62 +91,82 @@ const BestRecords = () => {
           });
         })
         .finally(() => {
-          setVotingStatus((prev) => ({ ...prev, [id]: false })); // Reset voting status for this ID
+          setVotingStatus((prev) => ({ ...prev, [id]: false })); 
         });
     }
   };
 
-  const dataRows = currentData?.coins?.map((item, index) => {
-    const rank = (index + 1).toString().padStart(2, "0");
-    return [
-      <tr
-        key={index}
-        onClick={() => navigate(`/play?id=${item.id}`)}
-        className="cursor-pointer hover:opacity-70"
-      >
-        <td className={`text-text-light sticky-column second-sticky-column`}>
-          {rank}
-        </td>
-        <td
-          className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
-        >
-          <IconText
-            icon={item?.coin_picture || heartFill}
-            text={item?.category_name || "Name"}
-          />
-        </td>
-        <td className="text-text-info">{item?.category || "Category"}</td>
-        <td className="text-text-light">
-          <IconText
-            icon={item?.blockchain?.icon || heartFill}
-            text={item?.chain_name || "Name"}
-          />
-        </td>
-        <td className="text-text-light">
-          <ColoredNumber number={item?.priceUsd24hAgo || 0} />
-        </td>
-        <td className="text-text-light">
-          <FormatMarketCap value={item?.marketCapUsd || 0} />
-        </td>
-        <td className="text-text-light">
-          <FormatMarketCap value={item?.priceUsd || 0} />
-        </td>
-        <td className="text-text-light">{formatDate(item?.launch_date)}</td>
-        <td
-          className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2"
-          onClick={(e) => handleVote(e, item.id)}
-        >
-          <img src={heartFill} alt="" />
-          {votingStatus[item.id] ? (
-            <Text>Voting..</Text>
-          ) : (
-            <Text>{item.total_votes || 0}</Text>
-          )}
-        </td>
-      </tr>,
-      <tr key={`spacer-${index}`} className="h-4"></tr>,
-    ];
-  });
+  const dataRows = currentData?.coins
+    ? [...currentData.coins] // This creates a shallow copy of the array which can be safely sorted
+        .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
+        .map((item, index) => {
+          const rank = (index + 1).toString().padStart(2, "0");
+          return [
+            <tr
+              key={index}
+              onClick={() => navigate(`/play?id=${item.id}`)}
+              className="cursor-pointer hover:opacity-70"
+            >
+              <td
+                className={`text-text-light sticky-column second-sticky-column`}
+              >
+                {item.promoted ? (
+                  <img
+                    src={fire}
+                    alt="Promoted"
+                    className="w-8 h-8 mr-2 rounded-full"
+                  />
+                ) : (
+                  rank
+                )}
+              </td>
+              <td
+                className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
+              >
+                <IconText
+                  icon={item?.coin_picture || heartFill}
+                  text={item?.category_name || "Name"}
+                />
+              </td>
+              <td className="text-text-info">{item?.category || "Category"}</td>
+              <td className="text-text-light">
+                <IconText
+                  icon={item?.blockchain?.icon || heartFill}
+                  text={item?.chain_name || "Name"}
+                />
+              </td>
+              <td className="text-text-light">
+                <ColoredNumber number={item?.priceUsd24hAgo || 0} />
+              </td>
+              <td className="text-text-light">
+                <FormatMarketCap value={item?.marketCapUsd || 0} />
+              </td>
+              <td className="text-text-light">
+                <FormatMarketCap value={item?.priceUsd || 0} />
+              </td>
+              <td className="text-text-light">
+                {formatDate(item?.launch_date)}
+              </td>
+              <td
+                className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevents navigating when clicking on the vote section
+                  handleVote(e, item.id);
+                }}
+              >
+                <img src={heartFill} alt="Vote" />
+                {votingStatus[item.id] ? (
+                  <Text>Voting..</Text>
+                ) : (
+                  <Text>{item.total_votes || 0}</Text>
+                )}
+              </td>
+            </tr>,
+            <tr key={`spacer-${index}`} className="h-4"></tr>,
+          ];
+        })
+    : [];
+
   const renderColumnTitle = (column) => {
     return (
       <span>

@@ -6,6 +6,7 @@ import {
   useGetCategoriesQuery,
   useGetChainsQuery,
   useGetPlatformsQuery,
+  useGetPresaleListingQuery,
 } from "../../app/features/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,8 @@ const AddCoins = () => {
     useGetCategoriesQuery();
   const { data: platformData, isLoading: platformLoading } =
     useGetPlatformsQuery();
+  const { data: presaleData } = useGetPresaleListingQuery();
+  console.log(presaleData)
   const { data: chains } = useGetChainsQuery();
 
   const [errors, setErrors] = useState({});
@@ -46,6 +49,8 @@ const AddCoins = () => {
     coingecko_link: "",
     coin_type: "",
     chain_id: "",
+    presale_listing_link: "",
+    listing_presale_id: "",
   });
 
   const isValidUrl = (url) => {
@@ -61,11 +66,10 @@ const AddCoins = () => {
     let newErrors = {};
     let isValid = true;
 
-    // Fields expected to be strings
-    const requiredFields = [ 
+    // Common required fields
+    let requiredFields = [
       "coin_name",
       "coin_symbol",
-      "listing_platform_id",
       "contract_address",
       "coin_description",
       "coin_type",
@@ -73,20 +77,36 @@ const AddCoins = () => {
       "category_id",
       "website_link",
       "telegram_contact",
-      "listing_link",
-      "coin_picture",
       "chain_id",
+      "coin_picture",
     ];
 
-    const urlFields = [
+    // Common URL fields
+    let urlFields = [
       "website_link",
-      "listing_link",
       "twitter_link",
       "telegram_link",
       "reddit_link",
       "coinmarketcap_link",
       "coingecko_link",
     ];
+
+    // Adjust fields based on the coin_type
+    if (formData.coin_type === "presale") {
+      requiredFields = [
+        ...requiredFields,
+        "presale_platform_id",
+        "presale_listing_link",
+      ];
+      urlFields = [...urlFields, "presale_listing_link"];
+    } else {
+      requiredFields = [
+        ...requiredFields,
+        "listing_platform_id",
+        "listing_link",
+      ];
+      urlFields = [...urlFields, "listing_link"];
+    }
 
     requiredFields.forEach((field) => {
       if (field === "coin_picture" && !formData[field]) {
@@ -118,6 +138,7 @@ const AddCoins = () => {
     setErrors(newErrors);
     return isValid;
   };
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -198,6 +219,7 @@ const AddCoins = () => {
           handleSubmit={handleSubmit}
           categories={categoriesData?.categories}
           platforms={platformData?.listing_platforms}
+          presale={presaleData?.listing_platforms}
           chains={chains?.chains}
           isLoading={isLoading}
           formData={formData}

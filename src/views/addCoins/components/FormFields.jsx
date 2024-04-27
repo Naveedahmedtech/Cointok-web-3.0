@@ -12,6 +12,7 @@ const FormFields = ({
   handleSubmit,
   categories,
   platforms,
+  presale,
   chains,
   isLoading,
   formData,
@@ -59,25 +60,51 @@ const FormFields = ({
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        <OutlinedDropdown
-          id="listing_platform_id"
-          label="Listing Platform"
-          options={platforms}
-          required={true}
-          defaultValue="Please select..."
-          onChange={handleChange}
-          error={errors.listing_platform_id}
-          value={formData.listing_platform_id}
-        />
-        <OutlinedInput
-          id="listing_link"
-          label="Listing Link"
-          placeholder="Listing Link"
-          required
-          onChange={handleChange}
-          error={errors.listing_link}
-          value={formData.listing_link}
-        />
+        {formData.coin_type === "presale" ? (
+          <>
+            <OutlinedDropdown
+              id="presale_platform_id"
+              label="Presale Platform"
+              options={platforms}
+              required={true}
+              defaultValue="Please select..."
+              onChange={handleChange}
+              error={errors.presale_platform_id}
+              value={formData.presale_platform_id}
+            />
+            <OutlinedInput
+              id="presalelisting_link"
+              label="Presale Listing Link"
+              placeholder="Presale Listing Link"
+              required
+              onChange={handleChange}
+              error={errors.presale_listing_link}
+              value={formData.presale_listing_link}
+            />
+          </>
+        ) : (
+          <>
+            <OutlinedDropdown
+              id="listing_platform_id"
+              label="Listing Platform"
+              options={presale || [{ id: 1, name: "No provided" }]}
+              required={true}
+              defaultValue="Please select..."
+              onChange={handleChange}
+              error={errors.listing_platform_id}
+              value={formData.listing_platform_id}
+            />
+            <OutlinedInput
+              id="listing_link"
+              label="Listing Link"
+              placeholder="Listing Link"
+              required
+              onChange={handleChange}
+              error={errors.listing_link}
+              value={formData.listing_link}
+            />
+          </>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
         <Buttons

@@ -63,6 +63,7 @@ export const apiSlice = createApi({
         "PromotedCoins",
         "getTodayBest",
         "getAllTimeBest",
+        "getCoinDetails",
       ],
     }),
     getAdvertise: builder.query({
@@ -101,6 +102,10 @@ export const apiSlice = createApi({
       query: () => `chains`,
       providesTags: ["getChains"],
     }),
+    getAdd: builder.query({
+      query: () => `coins/adds`,
+      providesTags: ["getAdd"],
+    }),
   }),
 });
 
@@ -118,4 +123,5 @@ export const {
   useGetTopTrendingQuery,
   useAddVoteMutation,
   useGetChainsQuery,
+  useGetAddQuery
 } = apiSlice;
