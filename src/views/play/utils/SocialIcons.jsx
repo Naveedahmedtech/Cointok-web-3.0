@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const socialImages = [insta, twitch, twitter, discord, unknown];
 
-const SocialIcons = () => {
+const SocialIcons = ({ details }) => {
   return (
     <div className="flex justify-center items-center flex-wrap gap-5 py-5 border-b border-[#323232]">
       {socialImages.map((image) => (

@@ -7,6 +7,7 @@ import {
   useGetChainsQuery,
   useGetPlatformsQuery,
   useGetPresaleListingQuery,
+  useGetPresalePlatformsQuery,
 } from "../../app/features/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,8 +18,7 @@ const AddCoins = () => {
     useGetCategoriesQuery();
   const { data: platformData, isLoading: platformLoading } =
     useGetPlatformsQuery();
-  const { data: presaleData } = useGetPresaleListingQuery();
-  console.log(presaleData)
+  const { data: presaleData } = useGetPresalePlatformsQuery();
   const { data: chains } = useGetChainsQuery();
 
   const [errors, setErrors] = useState({});
@@ -49,8 +49,8 @@ const AddCoins = () => {
     coingecko_link: "",
     coin_type: "",
     chain_id: "",
-    presale_listing_link: "",
-    listing_presale_id: "",
+    presale_link: "",
+    presale_platform_id: "",
   });
 
   const isValidUrl = (url) => {
@@ -219,7 +219,7 @@ const AddCoins = () => {
           handleSubmit={handleSubmit}
           categories={categoriesData?.categories}
           platforms={platformData?.listing_platforms}
-          presale={presaleData?.listing_platforms}
+          presale={presaleData?.presalelisting_platforms}
           chains={chains?.chains}
           isLoading={isLoading}
           formData={formData}

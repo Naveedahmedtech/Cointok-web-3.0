@@ -6,7 +6,7 @@ const ConfirmationModal = ({ isOpen, onClose, securityPin }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-70 overflow-y-auto h-full w-full flex items-center justify-center z-50">
-      <div className="relative bg-gray-800 rounded-lg shadow-2xl px-10 py-8">
+      <div className="relative bg-gray-800 rounded-lg shadow-2xl px-10 py-8 max-w-[600px] mx-5 md:mx-0">
         <button
           onClick={onClose}
           className="absolute top-0 right-0 mt-4 mr-4 text-gray-400 hover:text-gray-100"

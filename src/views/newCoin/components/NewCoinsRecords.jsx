@@ -12,17 +12,37 @@ import {
   formatDate,
 } from "../../home/components/utils/promoted";
 import { useNavigate } from "react-router-dom";
+import { useAddVoteMutation } from "../../../app/features/api";
 
-const NewCoinsRecords = () => {
-  const totalRecord = dummyData.length;
+const NewCoinsRecords = ({ coins, refetch }) => {
+  const totalRecord = coins?.length;
   const navigate = useNavigate();
 
-  const dataRows = dummyData.map((item, index) => {
+  const [addVoteMutation] = useAddVoteMutation();
+
+  const handleVote = (e, id) => {
+    e.preventDefault(); // Prevents any default action like submitting a form
+    e.stopPropagation(); // Stops the event from propagating up the DOM tree
+    addVoteMutation({ id })
+      .unwrap()
+      .then((data) => {
+        console.log("Vote added successfully:", data);
+        refetch();
+      })
+      .catch((error) => {
+        console.error("Failed to add vote:", error);
+        toast.error(error?.data?.message || "Error voting", {
+          position: "top-center",
+        });
+      });
+  };
+
+  const dataRows = coins?.map((item, index) => {
     const rank = (index + 1).toString().padStart(2, "0");
     return [
       <tr
         key={index}
-        onClick={() => navigate(`/play`)}
+        onClick={() => navigate(`/play?id=${item.id}`)}
         className="cursor-pointer hover:opacity-70"
       >
         <td
@@ -33,25 +53,34 @@ const NewCoinsRecords = () => {
         <td
           className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
         >
-          <IconText icon={item.coins.icon} text={item.coins.name} />
+          <IconText
+            icon={item?.coin_picture || defaultIcon1}
+            text={item?.coin_name || "fgf"}
+          />
         </td>
-        <td className="text-text-info">{item.category}</td>
+        <td className="text-text-info">{item?.category_name || "Category"}</td>
         <td className="text-text-light">
-          <IconText icon={item.blockchain.icon} text={item.blockchain.name} />
+          <IconText
+            icon={item?.blockchain?.icon || "No"}
+            text={item?.chain_name || "No"}
+          />
         </td>
         <td className="text-text-light">
-          <ColoredNumber number={item.volume24H} />
+          <ColoredNumber number={item?.volume24H || "+00"} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item.marketCap} />
+          <FormatMarketCap value={item?.marketCap || "00"} />
         </td>
         <td className="text-text-light">
-          <FormatMarketCap value={item.price} />
+          <FormatMarketCap value={item?.price || "00"} />
         </td>
-        <td className="text-text-light">{formatDate(item.launchDate)}</td>
-        <td className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md gap-2 px-3 py-2">
+        <td className="text-text-light">{formatDate(item?.launch_date)}</td>
+        <td
+          className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md py-2"
+          onClick={(e) => handleVote(e, item.id)}
+        >
           <img src={heartFill} alt="" />
-          <Text>{item.votes}</Text>
+          <Text>{item.total_votes || "0"}</Text>
         </td>
       </tr>,
       <tr key={`spacer-${index}`} className="h-4"></tr>,

@@ -102,9 +102,9 @@ export const apiSlice = createApi({
       query: () => `chains`,
       providesTags: ["getChains"],
     }),
-    getAdd: builder.query({
-      query: () => `coins/adds`,
-      providesTags: ["getAdd"],
+    getPresalePlatforms: builder.query({
+      query: () => `presaleplatforms`,
+      providesTags: ["getPresalePlatforms"],
     }),
   }),
 });
@@ -123,5 +123,5 @@ export const {
   useGetTopTrendingQuery,
   useAddVoteMutation,
   useGetChainsQuery,
-  useGetAddQuery
+  useGetPresalePlatformsQuery
 } = apiSlice;
