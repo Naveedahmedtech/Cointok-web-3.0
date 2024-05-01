@@ -17,6 +17,8 @@ const Home = () => {
   const { data: presaleListing } = useGetPresaleListingQuery();
   const { data: topTrending } = useGetTopTrendingQuery();
 
+  console.log(presaleListing);
+
   const coins = promotedCoins?.all_coins;
 
   const banner1 = data?.advertise?.[0]?.image;

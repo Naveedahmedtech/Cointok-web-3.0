@@ -100,15 +100,17 @@ const BestRecords = () => {
     ? [...currentData.coins] // This creates a shallow copy of the array which can be safely sorted
         .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
         .map((item, index) => {
-          const rank = (index + 1).toString().padStart(2, "0");
+          const rank = (index + 1)
+            .toString()
+            .padStart(2, "0");
           return [
             <tr
               key={index}
               onClick={() => navigate(`/play?id=${item.id}`)}
-              className="cursor-pointer hover:opacity-70"
+              className="cursor-pointer hover:opacity-70 "
             >
               <td
-                className={`text-text-light sticky-column second-sticky-column`}
+                className={`text-text-light sticky-column second-sticky-column flex justify-center items-center`}
               >
                 {item.promoted ? (
                   <img

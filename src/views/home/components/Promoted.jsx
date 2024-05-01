@@ -8,7 +8,7 @@ import {
 } from "./utils/promoted";
 import heartFill from "../../../assets/icons/heart-fill.png";
 import Text from "../../../components/text/Text";
-import { columns, dummyData } from "../../../utils/dummyData";
+import { columns } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
 import defaultIcon1 from "../../../assets/icons/default-icon1.png";
@@ -80,7 +80,7 @@ const BestRecords = ({ coins = [], refetch }) => {
           </td>
           <td className="text-text-light">{formatDate(item?.launch_date)}</td>
           <td
-            className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md py-2"
+            className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md py-2 "
             onClick={(e) => handleVote(e, item.id)}
           >
             <img src={heartFill} alt="" />
@@ -90,14 +90,19 @@ const BestRecords = ({ coins = [], refetch }) => {
         <tr key={`spacer-${index}`} className="h-4"></tr>,
       ];
     });
-  const renderColumnTitle = (column) => {
-    return (
-      <span>
-        {column.title}
-        {column.icon && <span className="text-text-primary"> ↓</span>}
-      </span>
-    );
-  };
+const renderColumnTitle = (column) => {
+  return (
+    <th
+      className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+        column.className || ""
+      }`}
+    >
+      {column.title}
+      {column.icon && <span className="text-text-primary"> ↓</span>}
+    </th>
+  );
+};
+
 
   return (
     <div className="my-10 relative">

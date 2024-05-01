@@ -19,9 +19,9 @@ const swapAddData = {
   image: logoIcon,
   subtitle: "Swap",
   buttonText: "Buy",
-  recommended: true,
-  add: true,
-  link: "https://www.google.com"
+  recommended: false,
+  add: false,
+  link: "#"
 };
 
 const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
@@ -35,9 +35,9 @@ const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
     ? details.presale_platform_name
     : details?.listingPlatform_name;
 
-  const platform_image = details?.presale_picture
-    ? details.presale_picture
-    : details?.listing_picture;
+  const platform_image = details?.presale_platform_icon
+    ? details.presale_platform_icon
+    : details?.listing_platform_icon;
 
   const platform_link = details?.presale_link
     ? details.presale_link
@@ -45,25 +45,24 @@ const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
 
   const path = `${platform_link}?contact=${details?.contract_address}`;
 
+
   return (
     <div className="bg-secondary border-b border-[#323232] mt-10 rounded-lg">
       {/* {items.map(({ id, platform, image, subtitle, buttonText }) => ( */}
       <SwapImageItems
-        key={"id"}
         platform={platform_name}
         image={platform_image || logoIcon}
-        subtitle={"subtitle"}
+        subtitle={"Swap"}
         buttonText={"Buy"}
-        path={path}
+        path={platform_link}
       />
       {/* ))} */}
       <AddSwapItem
-        key={adds?.id || swapAddData.id}
-        platform={adds?.name || swapAddData.platform}
-        image={adds?.picture || swapAddData.image}
-        recommended={adds?.recommended || swapAddData.recommended}
-        add={adds?.add || swapAddData.add}
-        link={adds?.link || swapAddData.link}
+        platform={details?.name || swapAddData.platform}
+        image={details?.swap_address_image || swapAddData.image}
+        recommended={details?.is_recommended || swapAddData.recommended}
+        add={details?.is_ad || swapAddData.add}
+        link={details?.swap_address_link || swapAddData.link}
         buttonText={"Buy"}
       />
       <div className="mt-10">

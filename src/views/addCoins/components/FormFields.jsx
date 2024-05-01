@@ -17,6 +17,7 @@ const FormFields = ({
   isLoading,
   formData,
 }) => {
+  console.log(formData.coin_type);
   return (
     <div className="bg-secondary p-5 rounded-lg flex-grow">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -65,7 +66,7 @@ const FormFields = ({
             <OutlinedDropdown
               id="presale_platform_id"
               label="Presale Platform"
-              options={platforms}
+              options={presale}
               required={true}
               defaultValue="Please select..."
               onChange={handleChange}
@@ -73,13 +74,13 @@ const FormFields = ({
               value={formData.presale_platform_id}
             />
             <OutlinedInput
-              id="presalelisting_link"
+              id="presale_link"
               label="Presale Listing Link"
               placeholder="Presale Listing Link"
               required
               onChange={handleChange}
-              error={errors.presale_listing_link}
-              value={formData.presale_listing_link}
+              error={errors.presale_link}
+              value={formData.presale_link}
             />
           </>
         ) : (
@@ -87,7 +88,7 @@ const FormFields = ({
             <OutlinedDropdown
               id="listing_platform_id"
               label="Listing Platform"
-              options={presale || [{ id: 1, name: "No provided" }]}
+              options={platforms}
               required={true}
               defaultValue="Please select..."
               onChange={handleChange}
