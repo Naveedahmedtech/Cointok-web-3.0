@@ -18,6 +18,8 @@ import {
   useGetAllTimeBestQuery,
   useGetTodayBestQuery,
 } from "../../../app/features/api";
+import { toast } from "react-toastify";
+
 
 const BestRecords = () => {
   const navigate = useNavigate();
@@ -75,12 +77,14 @@ const BestRecords = () => {
     e.preventDefault();
     e.stopPropagation();
     if (!votingStatus[id]) {
-      setVotingStatus((prev) => ({ ...prev, [id]: true })); 
+      setVotingStatus((prev) => ({ ...prev, [id]: true }));
 
       addVoteMutation({ id })
         .unwrap()
         .then((data) => {
-          console.log("Vote added successfully:", data);
+          toast.success("Vote added successfully", {
+            position: "top-center",
+          });
           todayBestRefetch();
           allTimeBestRefetch();
         })
@@ -91,7 +95,7 @@ const BestRecords = () => {
           });
         })
         .finally(() => {
-          setVotingStatus((prev) => ({ ...prev, [id]: false })); 
+          setVotingStatus((prev) => ({ ...prev, [id]: false }));
         });
     }
   };
@@ -100,9 +104,7 @@ const BestRecords = () => {
     ? [...currentData.coins] // This creates a shallow copy of the array which can be safely sorted
         .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
         .map((item, index) => {
-          const rank = (index + 1)
-            .toString()
-            .padStart(2, "0");
+          const rank = (index + 1).toString().padStart(2, "0");
           return [
             <tr
               key={index}
@@ -133,7 +135,7 @@ const BestRecords = () => {
               <td className="text-text-info">{item?.category || "Category"}</td>
               <td className="text-text-light">
                 <IconText
-                  icon={item?.blockchain?.icon || heartFill}
+                  icon={item?.chain_icon || heartFill}
                   text={item?.chain_name || "Name"}
                 />
               </td>

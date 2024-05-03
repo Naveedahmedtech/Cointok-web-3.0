@@ -25,6 +25,7 @@ const AddCoins = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [resetUploadKey, setResetUploadKey] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [token, setToken] = useState(0)
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
@@ -193,6 +194,8 @@ const AddCoins = () => {
         coin_type: "",
         chains: "",
       });
+      const token = result?.data?.token;
+      setToken(token);
     } catch (error) {
       console.error("Failed to add coin", error);
       const err = error.data.message
@@ -228,7 +231,7 @@ const AddCoins = () => {
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={toggleModal}
-        securityPin={"0000"}
+        securityPin={token}
       />
     </div>
   );

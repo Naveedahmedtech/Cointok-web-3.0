@@ -61,7 +61,7 @@ const NewCoinsRecords = ({ coins, refetch }) => {
         <td className="text-text-info">{item?.category_name || "Category"}</td>
         <td className="text-text-light">
           <IconText
-            icon={item?.blockchain?.icon || "No"}
+            icon={item?.chain_icon || "No"}
             text={item?.chain_name || "No"}
           />
         </td>
