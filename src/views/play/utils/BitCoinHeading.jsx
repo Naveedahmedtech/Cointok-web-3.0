@@ -16,13 +16,17 @@ const BitCoinHeading = ({ details, refetch, status }) => {
   const navigate = useNavigate();
   const id = details?.id;
 
-  console.log("refetch", refetch);
   const handleVote = () => {
     addVoteMutation({ id })
       .unwrap()
       .then((data) => {
         console.log("Vote added successfully:", data);
-        window.location.reload();
+        toast.success("Vote added successfully", {
+          position: "top-center",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000)
       })
       .catch((error) => {
         console.error("Failed to add vote:", error);
@@ -62,7 +66,7 @@ const BitCoinHeading = ({ details, refetch, status }) => {
     <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5">
       <div className="flex items-center space-x-2 mb-4">
         <img
-          src={details?.coin_picture || binance}
+          src={details?.chain_icon || binance}
           alt=""
           className="w-8 h-8 md:w-16 md:h-16 rounded-full mr-3"
           onError={({ currentTarget }) => {
@@ -72,7 +76,7 @@ const BitCoinHeading = ({ details, refetch, status }) => {
         />
         <div className="flex flex-col">
           <div>
-            <p>{details?.coin_name}</p>
+            <p>{details?.chain_name}</p>
           </div>
           <div className="flex gap-2">
             <Tooltip content={isCopied ? "Copied!" : address}>
