@@ -26,7 +26,7 @@ const CardComponent = ({ title, data }) => {
       {data?.length > 0 ? (
         data?.slice(0, 3)?.map((item) => (
           <Link
-            to="play"
+            to={`play?id=${item.id}`}
             key={item.coin_name}
             className="flex justify-between items-center border-b-2 border-footer p-2 py-5"
           >
