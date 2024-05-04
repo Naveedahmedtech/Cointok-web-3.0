@@ -100,7 +100,7 @@ const BestRecords = ({ coins = [], refetch }) => {
                 {formatDate(item?.launch_date)}
               </td>
               <td
-                className="text-text-light border-2 border-text-primary flex items-center justify-around gap-2 rounded-md px-3 py-2"
+                className="text-text-light border-2 border-text-primary flex items-center justify-around gap-1 rounded-md px-2 py-2"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevents navigating when clicking on the vote section
                   handleVote(e, item.id);

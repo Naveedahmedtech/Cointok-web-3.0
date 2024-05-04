@@ -13,28 +13,38 @@ import {
 } from "../../home/components/utils/promoted";
 import { useNavigate } from "react-router-dom";
 import { useAddVoteMutation } from "../../../app/features/api";
+import { toast } from "react-toastify";
 
 const NewCoinsRecords = ({ coins, refetch }) => {
   const totalRecord = coins?.length;
   const navigate = useNavigate();
-
-  const [addVoteMutation] = useAddVoteMutation();
+  const [votingStatus, setVotingStatus] = useState({});
+  const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
 
   const handleVote = (e, id) => {
-    e.preventDefault(); // Prevents any default action like submitting a form
-    e.stopPropagation(); // Stops the event from propagating up the DOM tree
-    addVoteMutation({ id })
-      .unwrap()
-      .then((data) => {
-        console.log("Vote added successfully:", data);
-        refetch();
-      })
-      .catch((error) => {
-        console.error("Failed to add vote:", error);
-        toast.error(error?.data?.message || "Error voting", {
-          position: "top-center",
+    e.preventDefault();
+    e.stopPropagation();
+    if (!votingStatus[id]) {
+      setVotingStatus((prev) => ({ ...prev, [id]: true }));
+
+      addVoteMutation({ id })
+        .unwrap()
+        .then((data) => {
+          toast.success("Vote added successfully", {
+            position: "top-center",
+          });
+          refetch();
+        })
+        .catch((error) => {
+          console.error("Failed to add vote:", error);
+          toast.error(error?.data?.message || "Error voting", {
+            position: "top-center",
+          });
+        })
+        .finally(() => {
+          setVotingStatus((prev) => ({ ...prev, [id]: false }));
         });
-      });
+    }
   };
 
   const dataRows = coins?.map((item, index) => {
