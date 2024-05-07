@@ -9,7 +9,7 @@ const AddSwapItem = ({ image, platform, recommended, add, link, buttonText }) =>
         <img src={image} alt={platform} className="h-16 w-auto mr-0 md:mr-5" />
         <div className="flex flex-col justify-center items-start text-left">
           <p className="text-text-light font-bold  text-sm md:text-2xl mb-2">
-            Your Swap Address
+            {platform}
           </p>
           <div className="flex gap-1 flex-wrap">
             {add && (
@@ -32,6 +32,7 @@ const AddSwapItem = ({ image, platform, recommended, add, link, buttonText }) =>
       <div>
         <a
           href={link}
+          target="_blank"
           className=" hover:opacity-75 text-text-light font-bold py-3 px-6 md:px-8 rounded-lg transition-opacity duration-150 text-xs md:text-sm button-gradient "
         >
           {buttonText}

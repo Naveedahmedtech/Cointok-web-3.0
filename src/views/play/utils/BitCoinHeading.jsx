@@ -51,8 +51,8 @@ const BitCoinHeading = ({ details, refetch, status }) => {
     details?.contract_address || "0x4e1C1BD35397042319Fe252d2e324ad439B19f1e";
   const displayAddress = `${address.substring(0, 11)}........`;
 
-  const voteCount = details?.total_votes ? details?.total_votes : 0;
-  const voteTooltip = details?.total_votes > 250 ? details?.total_votes : "";
+  const voteCount = details?.total_vote ? details?.total_vote : 0;
+  const voteTooltip = details?.total_vote > 250 ? details?.total_vote : "";
   const IsCoinAvailable = () => {
     if (details?.coin_market_cap_link) {
       return <img src={coin2} alt="" className="w-6 h-6" />;
@@ -111,9 +111,9 @@ const BitCoinHeading = ({ details, refetch, status }) => {
       </div>
       <div className="flex flex-col justify-center items-center gap-2 md:items-end">
         <div className="relative" onClick={handleVote}>
-          {details?.total_votes > 250 && (
+          {details?.total_vote > 250 && (
             <div className="absolute bg-gray-800 text-white py-1 px-2 rounded-md text-xs z-10 bottom-8 left-0 opacity-0 transition-opacity duration-200">
-              {details?.total_votes}
+              {details?.total_vote}
             </div>
           )}
           <div
