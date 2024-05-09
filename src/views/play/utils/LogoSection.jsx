@@ -7,7 +7,7 @@ const LogoSection = ({ details }) => {
       <img
         src={details?.coin_picture || logoIcon}
         alt=""
-        className="w-32 h-auto"
+        className="w-32 h-auto rounded-full"
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src = logoIcon;

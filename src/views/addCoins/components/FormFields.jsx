@@ -17,7 +17,7 @@ const FormFields = ({
   isLoading,
   formData,
 }) => {
-  console.log(formData.coin_type);
+  console.log("type",formData.coin_type);
   return (
     <div className="bg-secondary p-5 rounded-lg flex-grow">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
@@ -111,7 +111,7 @@ const FormFields = ({
         <Buttons
           onButtonClick={handleButtonClick}
           error={errors.coin_type}
-          value={formData.website_link}
+          value={formData.coin_type}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">

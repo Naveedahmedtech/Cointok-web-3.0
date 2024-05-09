@@ -22,12 +22,21 @@ const TopSection = ({ details, refetch, status }) => {
         <div className="lg:col-span-8  bg-secondary py-5 rounded-lg border-b-2 border-[#323232] relative">
           {/* Background as watermark */}
           <div
+            className="absolute left-[30%] bottom-1 lg:left-[25%] lg:bottom-[10px] w-[50%] h-[20%] lg:w-[50%] xl:lg:h-[30%]"
             style={{
-              position: "absolute",
-              left: "25%",
-              bottom: 10,
-              width: "50%",
-              height: "40%",
+              // position: "absolute",
+              // left: "25%",
+              // // left: "40%",
+              // left: "30%",
+              // // bottom: 10,
+              // bottom: 0,
+              // // large screens
+              // width: "50%",
+              // height: "30%",
+              // // width: "20%",
+              // // height: "30%",
+              // width: "40%",
+              // height: "30%",
               backgroundImage: `url(${backgroundImage})`,
               backgroundPosition: "center",
               backgroundSize: "contain",

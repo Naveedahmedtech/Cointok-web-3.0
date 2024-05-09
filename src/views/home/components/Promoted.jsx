@@ -8,17 +8,17 @@ import {
 } from "./utils/promoted";
 import heartFill from "../../../assets/icons/heart-fill.png";
 import Text from "../../../components/text/Text";
-import { columns } from "../../../utils/dummyData";
+import { columns, smColumns } from "../../../utils/dummyData";
 import glow from "../../../assets/glow/glow2.png";
 import { useNavigate } from "react-router-dom";
-import defaultIcon1 from "../../../assets/icons/default-icon1.png";
 import { useAddVoteMutation } from "../../../app/features/api";
 import { toast } from "react-toastify";
-import fire from "../../../assets/icons/fire.png";
+import useWindowSize from "../../../hooks/useWindowSize";
 
-const BestRecords = ({ coins = [], refetch }) => {
+const Promoted = ({ coins = [], refetch }) => {
   const [votingStatus, setVotingStatus] = useState({});
   const navigate = useNavigate();
+  const size = useWindowSize();
 
   const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
 
@@ -48,81 +48,139 @@ const BestRecords = ({ coins = [], refetch }) => {
     }
   };
 
-  const dataRows = coins
-    ? [...coins] // This creates a shallow copy of the array which can be safely sorted
-        .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
-        .map((item, index) => {
-          const rank = (index + 1).toString().padStart(2, "0");
-          return [
-            <tr
-              key={index}
-              onClick={() => navigate(`/play?id=${item.id}`)}
-              className="cursor-pointer hover:opacity-70 "
-            >
-              <td
-                className={`text-text-light sticky-column second-sticky-column flex justify-center items-center`}
+  let dataRows = [];
+  if (size.width <= 786) {
+    dataRows = coins
+      ? [...coins] // This creates a shallow copy of the array which can be safely sorted
+          .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
+          .map((item, index) => {
+            const rank = (index + 1).toString().padStart(2, "0");
+            return [
+              <tr
+                key={index}
+                onClick={() => navigate(`/play?id=${item.id}`)}
+                className="cursor-pointer hover:opacity-70 "
               >
-                {item.promoted ? (
-                  <img
-                    src={fire}
-                    alt="Promoted"
-                    className="w-8 h-8 mr-2 rounded-full"
+                <td
+                  className={`text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5`}
+                >
+                  <IconText
+                    icon={item?.coin_picture || heartFill}
+                    text={item?.coin_name || "Name"}
+                    rank={rank}
                   />
-                ) : (
-                  rank
-                )}
-              </td>
-              <td
-                className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
+                </td>
+                <td
+                  className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center  gap-1 rounded-md px-2 py-2 w-32"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents navigating when clicking on the vote section
+                    handleVote(e, item.id);
+                  }}
+                >
+                  <img src={heartFill} alt="Vote" />
+                  {votingStatus[item.id] ? (
+                    <Text>Voting..</Text>
+                  ) : (
+                    <Text>{item.total_votes || 0}</Text>
+                  )}
+                </td>
+                <td className="text-text-info">
+                  {item?.category_name || "Category"}
+                </td>
+                <td className="text-text-light min-w-40">
+                  <IconText
+                    icon={item?.chain_icon || heartFill}
+                    text={item?.chain_name || "Name"}
+                  />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <ColoredNumber number={item?.priceUsd24hAgo || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <FormatMarketCap value={item?.marketCapUsd || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <FormatMarketCap value={item?.priceUsd || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  {formatDate(item?.launch_date)}
+                </td>
+              </tr>,
+              <tr key={`spacer-${index}`} className="h-4"></tr>,
+            ];
+          })
+      : [];
+  } else {
+    dataRows = coins
+      ? [...coins] // This creates a shallow copy of the array which can be safely sorted
+          .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
+          .map((item, index) => {
+            const rank = (index + 1).toString().padStart(2, "0");
+            return [
+              <tr
+                key={index}
+                onClick={() => navigate(`/play?id=${item.id}`)}
+                className="cursor-pointer hover:opacity-70 "
               >
-                <IconText
-                  icon={item?.coin_picture || heartFill}
-                  text={item?.category_name || "Name"}
-                />
-              </td>
-              <td className="text-text-info">{item?.category || "Category"}</td>
-              <td className="text-text-light">
-                <IconText
-                  icon={item?.chain_icon || heartFill}
-                  text={item?.chain_name || "Name"}
-                />
-              </td>
-              <td className="text-text-light">
-                <ColoredNumber number={item?.priceUsd24hAgo || 0} />
-              </td>
-              <td className="text-text-light">
-                <FormatMarketCap value={item?.marketCapUsd || 0} />
-              </td>
-              <td className="text-text-light">
-                <FormatMarketCap value={item?.priceUsd || 0} />
-              </td>
-              <td className="text-text-light">
-                {formatDate(item?.launch_date)}
-              </td>
-              <td
-                className="text-text-light border-2 border-text-primary flex items-center justify-around gap-1 rounded-md px-2 py-2"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevents navigating when clicking on the vote section
-                  handleVote(e, item.id);
-                }}
-              >
-                <img src={heartFill} alt="Vote" />
-                {votingStatus[item.id] ? (
-                  <Text>Voting..</Text>
-                ) : (
-                  <Text>{item.total_votes || 0}</Text>
-                )}
-              </td>
-            </tr>,
-            <tr key={`spacer-${index}`} className="h-4"></tr>,
-          ];
-        })
-    : [];
+                <td
+                  className={`text-text-light min-w-40 sticky-column second-sticky-column flex justify-center items-center`}
+                >
+                  {rank}
+                </td>
+                <td
+                  className={`text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5`}
+                >
+                  <IconText
+                    icon={item?.coin_picture || heartFill}
+                    text={item?.coin_name || "Name"}
+                  />
+                </td>
+                <td className="text-text-info">
+                  {item?.category_name || "Category"}
+                </td>
+                <td className="text-text-light min-w-40">
+                  <IconText
+                    icon={item?.chain_icon || heartFill}
+                    text={item?.chain_name || "Name"}
+                  />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <ColoredNumber number={item?.priceUsd24hAgo || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <FormatMarketCap value={item?.marketCapUsd || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  <FormatMarketCap value={item?.priceUsd || 0} />
+                </td>
+                <td className="text-text-light min-w-40">
+                  {formatDate(item?.launch_date)}
+                </td>
+                <td
+                  className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center  gap-1 rounded-md px-2 py-2 w-32"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents navigating when clicking on the vote section
+                    handleVote(e, item.id);
+                  }}
+                >
+                  <img src={heartFill} alt="Vote" />
+                  {votingStatus[item.id] ? (
+                    <Text>Voting..</Text>
+                  ) : (
+                    <Text>{item.total_votes || 0}</Text>
+                  )}
+                </td>
+              </tr>,
+              <tr key={`spacer-${index}`} className="h-4"></tr>,
+            ];
+          })
+      : [];
+  }
 
   const renderColumnTitle = (column) => {
     return (
       <th
-        className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+        className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider flex gap-1 ${
           column.className || ""
         }`}
       >
@@ -131,6 +189,8 @@ const BestRecords = ({ coins = [], refetch }) => {
       </th>
     );
   };
+
+  const isColumns = size.width <= 786 ? smColumns : columns;
 
   return (
     <div className="my-10 relative">
@@ -147,7 +207,7 @@ const BestRecords = ({ coins = [], refetch }) => {
             </Text>
           </div>
         }
-        columns={columns.map((column) => ({
+        columns={isColumns.map((column) => ({
           ...column,
           title: renderColumnTitle(column),
         }))}
@@ -159,4 +219,4 @@ const BestRecords = ({ coins = [], refetch }) => {
   );
 };
 
-export default BestRecords;
+export default Promoted;

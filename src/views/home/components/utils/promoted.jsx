@@ -1,23 +1,24 @@
 import defaultIcon1 from "../../../../assets/icons/default-icon1.png";
 
-export const IconText = ({ icon, text }) => (
-  <div className="flex items-center">
+export const IconText = ({ icon, text, rank, fire, item }) => (
+  <div className="flex items-center  justify-center">
+    {item?.promoted ? (
+      <img src={fire} alt="Promoted" className="w-8 h-8 mr-2 rounded-full" />
+    ) : (
+      <span className="mr-2">{rank}</span>
+    )}
     <img
       src={icon}
       alt=""
-      className="w-8 h-8 mr-2 rounded-full"
+      className="w-8 h-8 rounded-full"
       onError={({ currentTarget }) => {
         currentTarget.onerror = null;
         currentTarget.src = defaultIcon1;
       }}
     />
-    <div className="overflow-hidden whitespace-nowrap overflow-ellipsis">
-      {text}
-    </div>
+    <div className="flex-1 w-[150px] max-w-[150px]">{text}</div>
   </div>
 );
-
-
 
 export const ColoredNumber = ({ number }) => (
   <span style={{ color: number < 0 ? "red" : "#00FFA3" }}>{number}</span>
@@ -46,4 +47,3 @@ export const formatDate = (dateString) => {
     return `${months} month${months > 1 ? "s" : ""} ago`;
   }
 };
-

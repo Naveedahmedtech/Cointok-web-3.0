@@ -11,6 +11,17 @@ export const columns = [
   { key: "launchDate", title: "Launch Date", icon: "↓" },
   { key: "votes", title: "Votes", icon: "↓" },
 ];
+export const smColumns = [
+  // { key: "rank", title: "Rank" },
+  { key: "coin", title: "Coin" },
+  { key: "votes", title: "Votes", icon: "↓" },
+  { key: "category", title: "Category" },
+  { key: "blockchain", title: "Blockchain" },
+  { key: "volume24H", title: "24H Volume ", icon: "↓", color: "#FF0000" },
+  { key: "marketCap", title: "Market Cap", icon: "↓" },
+  { key: "price", title: "Price", icon: "↓" },
+  { key: "launchDate", title: "Launch Date", icon: "↓" },
+];
 export const defaultDescription = `DESCRIPTION GigaChadGPT ($GIGA) is the ultimate fusion of GigaChad, an
           internet legend, and Artificial Intelligence. This token takes the
           alpha energy of GigaChad and combines it with powerful AI

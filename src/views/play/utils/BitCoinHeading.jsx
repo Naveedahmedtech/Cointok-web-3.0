@@ -117,7 +117,7 @@ const BitCoinHeading = ({ details, refetch, status }) => {
             </div>
           )}
           <div
-            className={`text-text-light border-2 border-text-primary flex items-center justify-around flex-wrap rounded-md p-2 w-28 cursor-pointer ${
+            className={`text-text-light border-2 border-text-primary flex items-center justify-center gap-1 flex-wrap rounded-md p-2 w-28 cursor-pointer ${
               isVoting ? "opacity-50" : ""
             }`}
           >

@@ -41,8 +41,8 @@ const CardComponent = ({ title, data }) => {
                 }}
               />
               <div>
-                <Text className="text-text-light">
-                  {item?.coin_name || "N/A"}
+                <Text className="text-text-light text-sm">
+                  {item?.coin_name?.substring(0, 8) + ".." || "N/A"}
                 </Text>
                 <Text className="text-text-secondary">
                   {item?.coin_symbol || "Sub"}
@@ -51,7 +51,7 @@ const CardComponent = ({ title, data }) => {
             </div>
             <div className="flex">
               <Text className="text-text-secondary mr-0 md:mr-5">
-                {item?.date || "4 hours ago"}
+                {item?.date?.substring(0, 8) + ".." || "4 hours ago"}
               </Text>
               <img src={rightIcon} alt="" className="w-auto h-6" />
             </div>
