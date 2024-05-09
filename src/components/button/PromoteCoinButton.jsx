@@ -4,7 +4,7 @@ import Text from "../text/Text";
 
 const PromoteCoinButton = () => {
   return (
-    <div className="border-2 border-text-primary px-4 py-1 flex justify-between items-center rounded-full gap-1 max-w-[270px]">
+    <div className="border-2 border-text-primary px-2 md:px-4 py-1 flex justify-between items-center rounded-full gap-1 max-w-[270px]">
       <Text className="text-text-primary">PROMOTE YOUR COIN</Text>
       <div className="text-text-light">|</div>
       <img src={upIcon} alt="Up icon" className="w-auto h-8" />

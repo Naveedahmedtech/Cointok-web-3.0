@@ -7,7 +7,11 @@ const LogoSection = ({ details }) => {
       <img
         src={details?.coin_picture || logoIcon}
         alt=""
-        className="w-auto h-32"
+        className="w-32 h-auto rounded-full"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src = logoIcon;
+        }}
       />
       <div>
         <div className="flex my-2 mb-5">
@@ -18,7 +22,7 @@ const LogoSection = ({ details }) => {
             {details?.coin_symbol}
           </p>
         </div>
-        <Badge className="text-text-light">Swap</Badge>
+        <Badge className="text-text-light">{details?.category_name}</Badge>
       </div>
     </div>
   );

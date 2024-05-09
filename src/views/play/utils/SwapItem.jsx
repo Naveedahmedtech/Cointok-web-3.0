@@ -21,7 +21,7 @@ const swapAddData = {
   buttonText: "Buy",
   recommended: false,
   add: false,
-  link: "#"
+  link: "#",
 };
 
 const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
@@ -31,20 +31,22 @@ const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
     setItems(swapData);
   }, []);
 
-  const platform_name = details?.presale_platform_name
-    ? details.presale_platform_name
-    : details?.listingPlatform_name;
+  const platform_name =
+    details?.coin_type === "fair_launch"
+      ? details?.listing_platform_name
+      : details?.presale_platform_name;
 
-  const platform_image = details?.presale_platform_icon
-    ? details.presale_platform_icon
-    : details?.listing_platform_icon;
+  const platform_image =
+    details?.coin_type === "fair_launch"
+      ? details?.listing_platform_icon
+      : details?.presale_platform_icon;
 
-  const platform_link = details?.presale_link
-    ? details.presale_link
-    : details?.listing_link;
+  const platform_link =
+    details?.coin_type === "fair_launch"
+      ? details?.listing_link
+      : details?.presale_link;
 
-  const path = `${platform_link}?contact=${details?.contract_address}`;
-
+  const path = `${details?.swap_address_link}${details?.contract_address}`;
 
   return (
     <div className="bg-secondary border-b border-[#323232] mt-10 rounded-lg">
@@ -52,17 +54,17 @@ const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
       <SwapImageItems
         platform={platform_name}
         image={platform_image || logoIcon}
-        subtitle={"Swap"}
+        subtitle={details?.coin_symbol}
         buttonText={"Buy"}
         path={platform_link}
       />
       {/* ))} */}
       <AddSwapItem
-        platform={details?.name || swapAddData.platform}
+        platform={details?.swap_address_name || swapAddData.platform}
         image={details?.swap_address_image || swapAddData.image}
         recommended={details?.is_recommended || swapAddData.recommended}
         add={details?.is_ad || swapAddData.add}
-        link={details?.swap_address_link || swapAddData.link}
+        link={path || swapAddData.link}
         buttonText={"Buy"}
       />
       <div className="mt-10">

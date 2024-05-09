@@ -7,7 +7,7 @@ const SwapImageItems = ({ platform, subtitle, image, buttonText, path }) => (
       <img
         src={image}
         alt={platform}
-        className="h-16 w-auto mr-5"
+        className="h-12 md:h-16 w-auto mr-2 md:mr-5"
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
           currentTarget.src = logoIcon;
@@ -24,7 +24,7 @@ const SwapImageItems = ({ platform, subtitle, image, buttonText, path }) => (
       <a
         href={path}
         target="_blank"
-        className="bg-text-primary hover:opacity-75 text-text-light font-bold py-3 px-6 md:px-8 rounded-lg transition-opacity duration-150 text-xs md:text-sm cursor-pointer"
+        className="bg-text-primary hover:opacity-75 text-text-light font-bold py-3 px-4 md:px-8 rounded-lg transition-opacity duration-150 text-xs md:text-sm cursor-pointer"
       >
         {buttonText}
       </a>

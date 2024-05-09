@@ -35,8 +35,8 @@ const Table = ({
                     className={`text-center px-4  text-text-secondary ${
                       index === 0
                         ? "sticky-column first-sticky"
-                        : index === 1
-                        ? "sticky-column second-sticky"
+                        // : index === 1
+                        // ? "sticky-column second-sticky"
                         : ""
                     }`}
                   >

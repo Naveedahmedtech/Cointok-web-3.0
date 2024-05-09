@@ -11,7 +11,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 
+
 
 @media screen and (max-width: 768px) {
     .sticky-column {
@@ -26,15 +26,15 @@ body {
         left: 0px;
     }
 
-    .third-sticky-column {
+    /* .third-sticky-column {
         left: 60px;
-    }
+    } */
 
     .first-sticky {
         left: 0px;
     }
 
-    .second-sticky {
+    /* .second-sticky {
         left: 60px;
-    }
-} */
+    } */
+}

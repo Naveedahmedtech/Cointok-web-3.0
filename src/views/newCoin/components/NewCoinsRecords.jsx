@@ -4,7 +4,7 @@ import heartFill from "../../../assets/icons/heart-fill.png";
 import Text from "../../../components/text/Text";
 import Badge from "../../../components/badge/Badge";
 import glow from "../../../assets/glow/glow2.png";
-import { columns, dummyData } from "../../../utils/dummyData";
+import { columns, dummyData, smColumns } from "../../../utils/dummyData";
 import {
   ColoredNumber,
   FormatMarketCap,
@@ -14,12 +14,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAddVoteMutation } from "../../../app/features/api";
 import { toast } from "react-toastify";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const NewCoinsRecords = ({ coins, refetch }) => {
   const totalRecord = coins?.length;
   const navigate = useNavigate();
   const [votingStatus, setVotingStatus] = useState({});
   const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
+  const size = useWindowSize();
 
   const handleVote = (e, id) => {
     e.preventDefault();
@@ -47,55 +49,113 @@ const NewCoinsRecords = ({ coins, refetch }) => {
     }
   };
 
-  const dataRows = coins?.map((item, index) => {
-    const rank = (index + 1).toString().padStart(2, "0");
-    return [
-      <tr
-        key={index}
-        onClick={() => navigate(`/play?id=${item.id}`)}
-        className="cursor-pointer hover:opacity-70"
-      >
-        <td
-          className={`text-text-light sticky-column second-sticky-column p-2 px-5`}
+  let dataRows = [];
+
+  if (size.width <= 768) {
+    dataRows = coins?.map((item, index) => {
+      const rank = (index + 1).toString().padStart(2, "0");
+      return [
+        <tr
+          key={index}
+          onClick={() => navigate(`/play?id=${item.id}`)}
+          className="cursor-pointer hover:opacity-70"
         >
-          {rank}
-        </td>
-        <td
-          className={`text-text-light sticky-column third-sticky-column p-2 px-5`}
+          <td
+            className={`text-text-light  sticky-column third-sticky-column p-2 px-5`}
+          >
+            <IconText
+              icon={item?.coin_picture || defaultIcon1}
+              text={item?.coin_name || "fgf"}
+              rank={rank}
+            />
+          </td>
+          <td
+            className="text-text-light border-2 border-text-primary flex items-center justify-center gap-1 rounded-md py-2 w-32"
+            onClick={(e) => handleVote(e, item.id)}
+          >
+            <img src={heartFill} alt="" />
+            <Text>{item.total_votes || "0"}</Text>
+          </td>
+          <td className="text-text-info min-w-40">
+            {item?.category_name || "Category"}
+          </td>
+          <td className="text-text-light min-w-40">
+            <IconText
+              icon={item?.chain_icon || "No"}
+              text={item?.chain_name || "No"}
+            />
+          </td>
+          <td className="text-text-light min-w-40">
+            <ColoredNumber number={item?.volume24H || "+00"} />
+          </td>
+          <td className="text-text-light min-w-40">
+            <FormatMarketCap value={item?.marketCap || "00"} />
+          </td>
+          <td className="text-text-light min-w-40">
+            <FormatMarketCap value={item?.price || "00"} />
+          </td>
+          <td className="text-text-light min-w-40  px-5">
+            {formatDate(item?.launch_date)}
+          </td>
+        </tr>,
+        <tr key={`spacer-${index}`} className="h-4"></tr>,
+      ];
+    });
+  } else {
+    dataRows = coins?.map((item, index) => {
+      const rank = (index + 1).toString().padStart(2, "0");
+      return [
+        <tr
+          key={index}
+          onClick={() => navigate(`/play?id=${item.id}`)}
+          className="cursor-pointer hover:opacity-70"
         >
-          <IconText
-            icon={item?.coin_picture || defaultIcon1}
-            text={item?.coin_name || "fgf"}
-          />
-        </td>
-        <td className="text-text-info">{item?.category_name || "Category"}</td>
-        <td className="text-text-light">
-          <IconText
-            icon={item?.chain_icon || "No"}
-            text={item?.chain_name || "No"}
-          />
-        </td>
-        <td className="text-text-light">
-          <ColoredNumber number={item?.volume24H || "+00"} />
-        </td>
-        <td className="text-text-light">
-          <FormatMarketCap value={item?.marketCap || "00"} />
-        </td>
-        <td className="text-text-light">
-          <FormatMarketCap value={item?.price || "00"} />
-        </td>
-        <td className="text-text-light">{formatDate(item?.launch_date)}</td>
-        <td
-          className="text-text-light border-2 border-text-primary flex items-center justify-around rounded-md py-2"
-          onClick={(e) => handleVote(e, item.id)}
-        >
-          <img src={heartFill} alt="" />
-          <Text>{item.total_votes || "0"}</Text>
-        </td>
-      </tr>,
-      <tr key={`spacer-${index}`} className="h-4"></tr>,
-    ];
-  });
+          <td
+            className={`text-text-light min-w-40 sticky-column second-sticky-column p-2 px-5` }
+          >
+            {rank}
+          </td>
+          <td
+            className={`text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5`}
+          >
+            <IconText
+              icon={item?.coin_picture || defaultIcon1}
+              text={item?.coin_name || "fgf"}
+            />
+          </td>
+          <td className="text-text-info min-w-40">
+            {item?.category_name || "Category"}
+          </td>
+          <td className="text-text-light min-w-40">
+            <IconText
+              icon={item?.chain_icon || "No"}
+              text={item?.chain_name || "No"}
+            />
+          </td>
+          <td className="text-text-light min-w-40">
+            <ColoredNumber number={item?.volume24H || "+00"} />
+          </td>
+          <td className="text-text-light min-w-40">
+            <FormatMarketCap value={item?.marketCap || "00"} />
+          </td>
+          <td className="text-text-light min-w-40">
+            <FormatMarketCap value={item?.price || "00"} />
+          </td>
+          <td className="text-text-light min-w-40">
+            {formatDate(item?.launch_date)}
+          </td>
+          <td
+            className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md py-2 w-32"
+            onClick={(e) => handleVote(e, item.id)}
+          >
+            <img src={heartFill} alt="" />
+            <Text>{item.total_votes || "0"}</Text>
+          </td>
+        </tr>,
+        <tr key={`spacer-${index}`} className="h-4"></tr>,
+      ];
+    });
+  }
   const renderColumnTitle = (column) => {
     return (
       <span>
@@ -104,6 +164,8 @@ const NewCoinsRecords = ({ coins, refetch }) => {
       </span>
     );
   };
+  const isColumns = size.width <= 786 ? smColumns : columns;
+
 
   return (
     <div className="my-10  relative">
@@ -125,11 +187,11 @@ const NewCoinsRecords = ({ coins, refetch }) => {
             </Text>
           </div>
         }
-        columns={columns.map((column) => ({
+        columns={isColumns.map((column) => ({
           ...column,
           title: renderColumnTitle(column),
         }))}
-        rowComponents={dataRows}
+        rowComponents={dataRows || []}
         pageSize={10}
         showPagination={true}
       />

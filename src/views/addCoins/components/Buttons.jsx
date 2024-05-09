@@ -5,7 +5,7 @@ const Buttons = ({ onButtonClick, error, value }) => {
   const [clickedButton, setClickedButton] = useState(value || "fair_launch");
   useEffect(() => {
     if (!value) {
-      setClickedButton("fair_launch");
+      onButtonClick("fair_launch");
     }
   }, [value]);
 
