@@ -123,7 +123,7 @@ const Promoted = ({ coins = [], refetch }) => {
                 className="cursor-pointer hover:opacity-70 "
               >
                 <td
-                  className={`text-text-light min-w-40 sticky-column second-sticky-column flex justify-center items-center`}
+                  className={`text-text-light min-w-24 sticky-column second-sticky-column flex justify-center items-center`}
                 >
                   {rank}
                 </td>
@@ -133,6 +133,7 @@ const Promoted = ({ coins = [], refetch }) => {
                   <IconText
                     icon={item?.coin_picture || heartFill}
                     text={item?.coin_name || "Name"}
+                    promoted={true}
                   />
                 </td>
                 <td className="text-text-info">
@@ -142,6 +143,7 @@ const Promoted = ({ coins = [], refetch }) => {
                   <IconText
                     icon={item?.chain_icon || heartFill}
                     text={item?.chain_name || "Name"}
+                    promoted={true}
                   />
                 </td>
                 <td className="text-text-light min-w-40">

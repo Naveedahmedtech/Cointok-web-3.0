@@ -1,6 +1,6 @@
 import defaultIcon1 from "../../../../assets/icons/default-icon1.png";
 
-export const IconText = ({ icon, text, rank, fire, item }) => (
+export const IconText = ({ icon, text, rank, fire, item, promoted }) => (
   <div className="flex items-center  justify-center">
     {item?.promoted ? (
       <img src={fire} alt="Promoted" className="w-8 h-8 mr-2 rounded-full" />
@@ -10,13 +10,19 @@ export const IconText = ({ icon, text, rank, fire, item }) => (
     <img
       src={icon}
       alt=""
-      className="w-8 h-8 rounded-full"
+      className="w-8 h-8 rounded-full mr-4"
       onError={({ currentTarget }) => {
         currentTarget.onerror = null;
         currentTarget.src = defaultIcon1;
       }}
     />
-    <div className="flex-1 w-[150px] max-w-[150px]">{text}</div>
+    <div
+      className={`flex-1 text-start ${
+        promoted ? "w-[100px] max-w-[100px]" : "w-[150px] max-w-[150px]"
+      } `}
+    >
+      {text}
+    </div>
   </div>
 );
 
