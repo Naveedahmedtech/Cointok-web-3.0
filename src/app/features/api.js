@@ -66,8 +66,12 @@ export const apiSlice = createApi({
         "getCoinDetails",
       ],
     }),
-    getAdvertise: builder.query({
-      query: () => "advertise",
+    getAdvertiseDesktop: builder.query({
+      query: () => "advertise/desktop",
+      providesTags: ["Advertise"],
+    }),
+    getAdvertiseMobile: builder.query({
+      query: () => "advertise/mobile",
       providesTags: ["Advertise"],
     }),
     getNewListing: builder.query({
@@ -106,6 +110,10 @@ export const apiSlice = createApi({
       query: () => `presaleplatforms`,
       providesTags: ["getPresalePlatforms"],
     }),
+    searchCoin: builder.query({
+      query: (query) => `coin/search?query=${query}`,
+      providesTags: ["searchCoin"],
+    }),
   }),
 });
 
@@ -113,7 +121,6 @@ export const {
   useGetCategoriesQuery,
   useGetPlatformsQuery,
   useAddCoinMutation,
-  useGetAdvertiseQuery,
   useGetNewListingQuery,
   useGetPromotedCoinsQuery,
   useGetPresaleListingQuery,
@@ -123,5 +130,8 @@ export const {
   useGetTopTrendingQuery,
   useAddVoteMutation,
   useGetChainsQuery,
-  useGetPresalePlatformsQuery
+  useGetPresalePlatformsQuery,
+  useGetAdvertiseDesktopQuery,
+  useGetAdvertiseMobileQuery,
+  useSearchCoinQuery
 } = apiSlice;

@@ -7,22 +7,30 @@ import BestRecords from "./components/BestRecords";
 import Partners from "./components/Partners";
 import NewsLetter from "./components/NewsLetter";
 import Banner2 from "./components/Banner2";
-import { useGetAdvertiseQuery, useGetNewListingQuery, useGetPresaleListingQuery, useGetPromotedCoinsQuery, useGetTopTrendingQuery } from "../../app/features/api";
+import {
+  useGetAdvertiseDesktopQuery,
+  useGetAdvertiseMobileQuery,
+  useGetNewListingQuery,
+  useGetPresaleListingQuery,
+  useGetPromotedCoinsQuery,
+  useGetTopTrendingQuery,
+} from "../../app/features/api";
 import ConfirmationModal from "../../components/modals/ConfirmationModal";
 
 const Home = () => {
-  const { data, isLoading, isError } = useGetAdvertiseQuery();
-  const { data: promotedCoins, refetch: promotedRefetch } = useGetPromotedCoinsQuery();
+  const { data: promotedCoins, refetch: promotedRefetch } =
+    useGetPromotedCoinsQuery();
   const { data: newListing } = useGetNewListingQuery();
   const { data: presaleListing } = useGetPresaleListingQuery();
   const { data: topTrending } = useGetTopTrendingQuery();
+  const { data: desktop } = useGetAdvertiseDesktopQuery();
+  const { data: mobile } = useGetAdvertiseMobileQuery();
 
-  console.log(presaleListing);
 
   const coins = promotedCoins?.all_coins;
 
-  const banner1 = data?.advertise?.[0]?.image;
-  const banner2 = data?.advertise?.[1]?.image;
+  const banner1 = desktop?.advertise?.image;
+  const banner2 = mobile?.advertise?.image;
   return (
     <>
       <div className="px-5">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import Pagination from "./Pagination";
 
@@ -10,12 +10,37 @@ const Table = ({
   showPagination,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "" });
 
-  const totalPages = Math.ceil(rowComponents?.length / pageSize);
+  const sortedRows = useMemo(() => {
+    let sortableItems = [...rowComponents];
+    if (sortConfig.key !== null) {
+      sortableItems.sort((a, b) => {
+        const index = columns.findIndex((col) => col.key === sortConfig.key);
+        const aVal = a.props.children[index]?.props.children;
+        const bVal = b.props.children[index]?.props.children;
+        if (aVal < bVal) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (aVal > bVal) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [rowComponents, sortConfig]);
 
-  const startRow = (currentPage - 1) * pageSize;
-  const endRow = startRow + pageSize;
-  const visibleRows = rowComponents?.slice(startRow, endRow);
+  const requestSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+    setCurrentPage(1); // Reset to the first page whenever the sort changes
+  };
+
+  const totalPages = Math.ceil(sortedRows.length / pageSize);
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -29,23 +54,29 @@ const Table = ({
           <table className="w-full">
             <thead>
               <tr>
-                {columns?.map((column, index) => (
+                {columns.map((column, index) => (
                   <th
                     key={column.key}
-                    className={`text-center px-4  text-text-secondary ${
-                      index === 0
-                        ? "sticky-column first-sticky"
-                        // : index === 1
-                        // ? "sticky-column second-sticky"
-                        : ""
+                    onClick={() => requestSort(column.key)}
+                    className={`text-center px-4 text-text-secondary ${
+                      index === 0 ? "sticky-column first-sticky" : ""
                     }`}
                   >
-                    {column?.title}
+                    {column.title}
+                    {sortConfig.key === column.key
+                      ? sortConfig.direction === "ascending"
+                        ? " ↓"
+                        : " ↑"
+                      : null}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="text-center">{visibleRows}</tbody>
+            <tbody className="text-center">
+              {sortedRows
+                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+                .map((row, index) => React.cloneElement(row, { key: index }))}
+            </tbody>
           </table>
         </div>
       </div>
