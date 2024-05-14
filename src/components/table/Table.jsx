@@ -11,7 +11,6 @@ import heartFill from "../../assets/icons/heart-fill.png";
 import fire from "../../assets/icons/fire.png";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "../../hooks/useWindowSize";
-// import { columns, smColumns } from "../../utils/dummyData";
 
 const Table = ({
   header,
