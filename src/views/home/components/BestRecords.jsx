@@ -19,15 +19,12 @@ import {
   useGetTodayBestQuery,
 } from "../../../app/features/api";
 import { toast } from "react-toastify";
-import useWindowSize from "../../../hooks/useWindowSize";
 
 const BestRecords = () => {
-  const navigate = useNavigate();
   const [currentData, setCurrentData] = useState([]);
   const [votingStatus, setVotingStatus] = useState({});
   const [active, setActive] = useState("today"); // Track which button is active
   const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
-  const size = useWindowSize();
 
   const {
     data: todayBest,
@@ -101,155 +98,6 @@ const BestRecords = () => {
     }
   };
 
-  let dataRows = [];
-
-  if (size.width <= 768) {
-    dataRows = currentData?.coins
-      ? [...currentData.coins] // This creates a shallow copy of the array which can be safely sorted
-          .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
-          .map((item, index) => {
-            const rank = (index + 1).toString().padStart(2, "0");
-            return [
-              <tr
-                key={index}
-                onClick={() => navigate(`/play?id=${item.id}`)}
-                className="cursor-pointer hover:opacity-70"
-              >
-                <td
-                  className={`text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5`}
-                >
-                  <IconText
-                    icon={item?.coin_picture || heartFill}
-                    text={item?.coin_name || "Name"}
-                    rank={rank}
-                    fire={fire}
-                    item={item}
-                  />
-                </td>
-                <td
-                  className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md px-3 py-2 w-32"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleVote(e, item.id);
-                  }}
-                >
-                  <img src={heartFill} alt="Vote" />
-                  {votingStatus[item.id] ? (
-                    <Text>Voting..</Text>
-                  ) : (
-                    <Text>{item.total_votes || 0}</Text>
-                  )}
-                </td>
-                <td className="text-text-info">
-                  {item?.category_name || "Category"}
-                </td>
-                <td className="text-text-light min-w-40">
-                  <IconText
-                    icon={item?.chain_icon || heartFill}
-                    text={item?.chain_name || "Name"}
-                  />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <ColoredNumber number={item?.priceUsd24hAgo || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item?.marketCapUsd || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item?.priceUsd || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  {formatDate(item?.launch_date)}
-                </td>
-              </tr>,
-              <tr key={`spacer-${index}`} className="h-4"></tr>,
-            ];
-          })
-      : [];
-  } else {
-    dataRows = currentData?.coins
-      ? [...currentData.coins] // This creates a shallow copy of the array which can be safely sorted
-          .sort((a, b) => b.promoted - a.promoted) // Correct sorting logic for booleans
-          .map((item, index) => {
-            const rank = (index + 1).toString().padStart(2, "0");
-            return [
-              <tr
-                key={index}
-                onClick={() => navigate(`/play?id=${item.id}`)}
-                className="cursor-pointer hover:opacity-70"
-              >
-                <td
-                  className={`text-text-light min-w-40 sticky-column second-sticky-column flex justify-center items-center`}
-                >
-                  {item.promoted ? (
-                    <img
-                      src={fire}
-                      alt="Promoted"
-                      className="w-8 h-8 mr-2 rounded-full"
-                    />
-                  ) : (
-                    rank
-                  )}
-                </td>
-                <td
-                  className={`text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5`}
-                >
-                  <IconText
-                    icon={item?.coin_picture || heartFill}
-                    text={item?.coin_name || "Name"}
-                  />
-                </td>
-                <td className="text-text-info">
-                  {item?.category_name || "Category"}
-                </td>
-                <td className="text-text-light min-w-40">
-                  <IconText
-                    icon={item?.chain_icon || heartFill}
-                    text={item?.chain_name || "Name"}
-                  />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <ColoredNumber number={item?.priceUsd24hAgo || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item?.marketCapUsd || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item?.priceUsd || 0} />
-                </td>
-                <td className="text-text-light min-w-40">
-                  {formatDate(item?.launch_date)}
-                </td>
-                <td
-                  className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md px-3 py-2 w-32"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleVote(e, item.id);
-                  }}
-                >
-                  <img src={heartFill} alt="Vote" />
-                  {votingStatus[item.id] ? (
-                    <Text>Voting..</Text>
-                  ) : (
-                    <Text>{item.total_votes || 0}</Text>
-                  )}
-                </td>
-              </tr>,
-              <tr key={`spacer-${index}`} className="h-4"></tr>,
-            ];
-          })
-      : [];
-  }
-  const renderColumnTitle = (column) => {
-    return (
-      <span>
-        {column.title}
-        {column.icon && <span className="text-text-primary"> ↓</span>}
-      </span>
-    );
-  };
-
-  const isColumns = size.width <= 786 ? smColumns : columns;
 
 
   return (
@@ -276,13 +124,11 @@ const BestRecords = () => {
             </span>
           </div>
         }
-        columns={isColumns.map((column) => ({
-          ...column,
-          title: renderColumnTitle(column),
-        }))}
-        rowComponents={dataRows}
+        coins={currentData?.coins}
         pageSize={10}
         showPagination={true}
+        handleVote={handleVote}
+        votingStatus={votingStatus}
       />
     </div>
   );

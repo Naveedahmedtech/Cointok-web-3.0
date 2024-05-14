@@ -111,7 +111,7 @@ const NewCoinsRecords = ({ coins, refetch }) => {
           className="cursor-pointer hover:opacity-70"
         >
           <td
-            className={`text-text-light min-w-40 sticky-column second-sticky-column p-2 px-5` }
+            className={`text-text-light min-w-40 sticky-column second-sticky-column p-2 px-5`}
           >
             {rank}
           </td>
@@ -166,7 +166,6 @@ const NewCoinsRecords = ({ coins, refetch }) => {
   };
   const isColumns = size.width <= 786 ? smColumns : columns;
 
-
   return (
     <div className="my-10  relative">
       <img
@@ -187,13 +186,11 @@ const NewCoinsRecords = ({ coins, refetch }) => {
             </Text>
           </div>
         }
-        columns={isColumns.map((column) => ({
-          ...column,
-          title: renderColumnTitle(column),
-        }))}
-        rowComponents={dataRows || []}
+        coins={coins}
         pageSize={10}
         showPagination={true}
+        handleVote={handleVote}
+        votingStatus={votingStatus}
       />
     </div>
   );

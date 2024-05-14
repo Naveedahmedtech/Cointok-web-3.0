@@ -22,9 +22,9 @@ const SocialIcons = ({ details }) => {
     <div className="flex justify-center items-center flex-wrap gap-5 py-5 border-b border-[#323232]">
       {Object.entries(socialLinks).map(([key, { icon, url }]) =>
         url ? ( // Render only if URL is present
-          <Link to={{ pathname: url }} target="_blank" key={key}>
+          <a href={url} target="_blank" key={key}>
             <img src={icon} alt={key} className="w-auto h-12" />
-          </Link>
+          </a>
         ) : null
       )}
       {/* Rendering the 'unknown' icon if no specific icons are available and no links are provided */}
