@@ -8,9 +8,9 @@ import {
 } from "../../views/home/components/utils/promoted";
 import Text from "../text/Text";
 import heartFill from "../../assets/icons/heart-fill.png";
+import fire from "../../assets/icons/fire.png";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "../../hooks/useWindowSize";
-// import { columns, smColumns } from "../../utils/dummyData";
 
 const Table = ({
   header,
@@ -19,6 +19,7 @@ const Table = ({
   showPagination,
   handleVote,
   votingStatus,
+  promoted,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({
@@ -95,6 +96,7 @@ const Table = ({
                     icon={item.coin_picture || heartFill}
                     text={item.coin_name?.substring(0, 15) || "Name"}
                     rank={rank}
+                    promoted={promoted ? true : false}
                   />
                 </td>
                 <td
@@ -135,8 +137,18 @@ const Table = ({
               </>
             ) : (
               <>
-                <td className="text-text-light min-w-24 sticky-column second-sticky-column flex justify-center items-center">
-                  {rank}
+                <td
+                  className={`text-text-light sticky-column second-sticky-column flex justify-center items-center`}
+                >
+                  {promoted && item.promoted ? (
+                    <img
+                      src={fire}
+                      alt="Promoted"
+                      className="w-8 h-8 mr-2 rounded-full"
+                    />
+                  ) : (
+                    rank
+                  )}
                 </td>
                 <td className="text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5">
                   <IconText
