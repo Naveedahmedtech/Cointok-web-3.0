@@ -129,6 +129,7 @@ const BestRecords = () => {
         showPagination={true}
         handleVote={handleVote}
         votingStatus={votingStatus}
+        promoted={true}
       />
     </div>
   );

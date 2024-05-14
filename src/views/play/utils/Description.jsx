@@ -9,7 +9,7 @@ const Description = ({ description, coinImage }) => {
       className="description-container px-5 py-2 mt-2"
       style={{
         position: "relative", // Ensures the positioning context for the pseudo-element
-        padding: "inherit",
+        // padding: "inherit",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
