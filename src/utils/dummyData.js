@@ -1,19 +1,18 @@
 import defaultIcon1 from "../assets/icons/default-icon1.png";
 
 export const columns = [
-  { key: "rank", title: "Rank" },
-  { key: "coin", title: "Coin" },
-  { key: "category", title: "Category" },
-  { key: "blockchain", title: "Blockchain" },
-  { key: "volume24H", title: "24H Volume ", icon: "↓", color: "#FF0000" },
-  { key: "marketCap", title: "Market Cap", icon: "↓" },
-  { key: "price", title: "Price", icon: "↓" },
-  { key: "launchDate", title: "Launch Date", icon: "↓" },
-  { key: "votes", title: "Votes", icon: "↓" },
+  { key: "rank", title: "Rank", sortable: true },
+  { key: "coin_name", title: "Coin", sortable: true },
+  { key: "category_name", title: "Category", sortable: false },
+  { key: "chain_name", title: "Blockchain", sortable: false },
+  { key: "priceUsd24hAgo", title: "24H Volume ", icon: "↓", sortable: true },
+  { key: "marketCapUsd", title: "Market Cap", icon: "↓", sortable: true },
+  { key: "priceUsd", title: "Price", icon: "↓", sortable: true },
+  { key: "launch_date", title: "Launch Date", icon: "↓", sortable: true },
+  { key: "total_votes", title: "Votes", icon: "↓", sortable: true },
 ];
 export const smColumns = [
-  // { key: "rank", title: "Rank" },
-  { key: "coin", title: "Coin" },
+  { key: "coin", title: "Coin", },
   { key: "votes", title: "Votes", icon: "↓" },
   { key: "category", title: "Category" },
   { key: "blockchain", title: "Blockchain" },

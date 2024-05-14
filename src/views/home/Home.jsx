@@ -23,9 +23,8 @@ const Home = () => {
   const { data: newListing } = useGetNewListingQuery();
   const { data: presaleListing } = useGetPresaleListingQuery();
   const { data: topTrending } = useGetTopTrendingQuery();
-  const { data: desktop } = useGetAdvertiseDesktopQuery();
+  const { data: desktop, isLoading } = useGetAdvertiseDesktopQuery();
   const { data: mobile } = useGetAdvertiseMobileQuery();
-
 
   const coins = promotedCoins?.all_coins;
 
@@ -34,8 +33,14 @@ const Home = () => {
   return (
     <>
       <div className="px-5">
-        <Banner image={banner1} />
-        <Banner2 image={banner2} />
+        {isLoading ? (
+          <p>loading..</p>
+        ) : (
+          <>
+            <Banner image={banner1} />
+            <Banner2 image={banner2} />
+          </>
+        )}
         <ConfirmationModal />
         <Cards
           newListing={newListing?.coins}
