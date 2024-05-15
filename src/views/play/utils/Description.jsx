@@ -18,7 +18,7 @@ const Description = ({ description, coinImage }) => {
     >
 
       {/* Content */}
-      <div className="content px-5">
+      <div className="content px-2 md:px-5">
         <Text className="text-2xl text-text-light font-bold mb-2">
           Description
         </Text>

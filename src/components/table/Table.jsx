@@ -94,7 +94,7 @@ const Table = ({
                 <td className="text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5">
                   <IconText
                     icon={item.coin_picture || heartFill}
-                    text={item.coin_name?.substring(0, 15) || "Name"}
+                    text={item.coin_name?.substring(0, 10) || "Name"}
                     rank={rank}
                     promoted={promoted ? true : false}
                   />
@@ -119,7 +119,7 @@ const Table = ({
                 <td className="text-text-light min-w-40">
                   <IconText
                     icon={item.chain_icon || heartFill}
-                    text={item.chain_name || "Name"}
+                    text={item.coin_symbol || "Name"}
                   />
                 </td>
                 <td className="text-text-light min-w-40">
@@ -163,7 +163,7 @@ const Table = ({
                 <td className="text-text-light min-w-40">
                   <IconText
                     icon={item.chain_icon || heartFill}
-                    text={item.chain_name || "Name"}
+                    text={item.coin_symbol || "Name"}
                     promoted={true}
                   />
                 </td>
