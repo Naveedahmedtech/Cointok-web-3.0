@@ -91,11 +91,16 @@ const Table = ({
           >
             {size.width <= 786 ? (
               <>
-                <td className="text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5">
+                <td
+                  className={`text-text-light sticky-column second-sticky-column `}
+                >
+                  {rank}
+                </td>
+                <td className="text-text-light  sticky-column third-sticky-column">
                   <IconText
                     icon={item.coin_picture || heartFill}
-                    text={item.coin_name?.substring(0, 10) || "Name"}
-                    rank={rank}
+                    text={item.coin_name?.toLowerCase()?.substring(0, 7) || "Name"}
+                    // rank={rank}
                     promoted={promoted ? true : false}
                   />
                 </td>
@@ -215,7 +220,11 @@ const Table = ({
                     key={column.key}
                     onClick={() => column.sortable && requestSort(column.key)}
                     className={`text-center px-4 text-text-secondary ${
-                      index === 0 ? "sticky-column first-sticky" : ""
+                      index === 0
+                        ? "sticky-column first-sticky"
+                        : index === 1
+                        ? "sticky-column second-sticky"
+                        : ""
                     } ${column.sortable ? "cursor-pointer" : ""}`}
                   >
                     {column.title}
@@ -270,6 +279,7 @@ export const columns = [
 ];
 
 export const smColumns = [
+  { key: "rank", title: "Rank", sortable: true },
   { key: "coin_name", title: "Coin", sortable: true },
   { key: "total_votes", title: "Votes", icon: "↓", sortable: true },
   { key: "category_name", title: "Category", sortable: false },

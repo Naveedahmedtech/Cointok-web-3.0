@@ -23,18 +23,18 @@ body {
     }
 
     .second-sticky-column {
-        left: 0px;
+        left: -10px;
     }
 
-    /* .third-sticky-column {
-        left: 60px;
-    } */
+    .third-sticky-column {
+        left: 40px;
+    }
 
     .first-sticky {
-        left: 0px;
+        left: -10px;
     }
 
-    /* .second-sticky {
-        left: 60px;
-    } */
+    .second-sticky {
+        left: 40px;
+    }
 }
