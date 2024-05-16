@@ -63,7 +63,7 @@ const BitCoinHeading = ({ details, refetch, status }) => {
   };
 
   return (
-    <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5">
+    <div className="flex flex-row justify-center lg:justify-between items-center gap-3 flex-wrap text-text-light border-b border-[#323232] py-2 px-0 md:px-5 ">
       <div className="flex items-center space-x-2 mb-4">
         <img
           src={details?.chain_icon || binance}
@@ -109,9 +109,9 @@ const BitCoinHeading = ({ details, refetch, status }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-2 md:items-end">
+      <div className="flex-col justify-center items-center gap-2 md:items-end hidden md:flex">
         <div className="relative" onClick={handleVote}>
-          {details?.total_vote > 250 && (
+          {details?.total_vote > 9999999 && (
             <div className="absolute bg-gray-800 text-white py-1 px-2 rounded-md text-xs z-10 bottom-8 left-0 opacity-0 transition-opacity duration-200">
               {details?.total_vote}
             </div>

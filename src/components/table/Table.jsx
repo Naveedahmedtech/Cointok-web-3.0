@@ -11,6 +11,7 @@ import heartFill from "../../assets/icons/heart-fill.png";
 import fire from "../../assets/icons/fire.png";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "../../hooks/useWindowSize";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 
 const Table = ({
   header,
@@ -79,77 +80,135 @@ const Table = ({
       const rank = (index + 1 + startRow).toString().padStart(2, "0");
 
       if (!item) {
-        console.error("Undefined item at index:", index);
+        console.error("Undefined item? at index:", index);
         return null;
       }
 
       return (
         <React.Fragment key={index}>
+          <tr key={`spacer-${index}`} className="hidden md:block md:h-4"></tr>
           <tr
-            onClick={() => navigate(`/play?id=${item.id}`)}
+            onClick={() => navigate(`/play?id=${item?.id}`)}
             className="cursor-pointer hover:opacity-70"
           >
             {size.width <= 786 ? (
               <>
                 <td
-                  className={`text-text-light sticky-column second-sticky-column `}
+                  className={`text-text-light sticky-column second-sticky-column py-4 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
                 >
-                  {rank}
-                </td>
-                <td className="text-text-light  sticky-column third-sticky-column">
-                  <IconText
-                    icon={item.coin_picture || heartFill}
-                    text={item.coin_name?.toLowerCase()?.substring(0, 7) || "Name"}
-                    // rank={rank}
-                    promoted={promoted ? true : false}
-                  />
+                  {promoted && item?.promoted ? (
+                    <img
+                      src={fire}
+                      alt="Promoted"
+                      className="rounded-full"
+                      style={{
+                        display: "inline-block",
+                        verticalAlign: "middle",
+                      }}
+                    />
+                  ) : (
+                    rank
+                  )}
                 </td>
                 <td
-                  className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md px-2 py-2 w-32"
+                  className={`text-text-light sticky-column third-sticky-column  ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
+                  <IconText
+                    icon={item?.coin_picture || heartFill}
+                    coin_symbol={item?.coin_symbol}
+                    text={
+                      item?.coin_name?.toLowerCase()?.substring(0, 7) || "Name"
+                    }
+                    // rank={rank}
+                    promoted={promoted ? true : false}
+                    marketCap={item?.coin_market_cap_link}
+                    gecko={item?.coin_gecko_link}
+                  />
+                </td>
+
+                <tr
+                  key={`spacer-${index}`}
+                  className={index === visibleRows.length - 1 ? "h-2" : "h-4"}
+                ></tr>
+
+                <td
+                  className={`text-text-light min-w-24 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md px-2 mx-2 py-2 w-16 }`}
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents navigating when clicking on the vote section
-                    handleVote(e, item.id);
+                    handleVote(e, item?.id);
                   }}
                 >
                   <img src={heartFill} alt="Vote" />
-                  {votingStatus[item.id] ? (
+                  {votingStatus[item?.id] ? (
                     <Text>Voting..</Text>
                   ) : (
-                    <Text>{item.total_votes || 0}</Text>
+                    <Text>
+                      {item?.total_votes > 99999
+                        ? item?.total_votes + ".."
+                        : item?.total_votes}
+                    </Text>
                   )}
                 </td>
-                <td className="text-text-info">
-                  {item.category_name || "Category"}
+                <td className={`text-text-info ${index === 0 ? "pt-5" : ""}`}>
+                  {item?.category_name || "Category"}
                 </td>
-                <td className="text-text-light min-w-40">
+                <td
+                  className={`text-text-light min-w-40 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
                   <IconText
-                    icon={item.chain_icon || heartFill}
-                    text={item.coin_symbol || "Name"}
+                    icon={item?.chain_icon || heartFill}
+                    text={item?.coin_symbol || "Name"}
                   />
                 </td>
-                <td className="text-text-light min-w-40">
-                  <ColoredNumber number={item.priceUsd24hAgo || 0} />
+                <td
+                  className={`text-text-light min-w-40 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
+                  <ColoredNumber number={parseInt(item?.priceUsd24hAgo) || 0} />
                 </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item.marketCapUsd || 0} />
+                <td
+                  className={`text-text-light min-w-40 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
+                  <FormatMarketCap value={item?.marketCapUsd || 0} />
                 </td>
-                <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item.priceUsd || 0} />
+                <td
+                  className={`text-text-light min-w-40 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
+                  <FormatMarketCap value={parseInt(item?.priceUsd) || 0} />
                 </td>
-                <td className="text-text-light min-w-40">
-                  {formatDate(item.launch_date)}
+                <td
+                  className={`text-text-light min-w-40 ${
+                    index === 0 ? "pt-5" : ""
+                  }`}
+                >
+                  {formatDate(item?.launch_date)}
                 </td>
               </>
             ) : (
               <>
                 <td
-                  className={`text-text-light sticky-column second-sticky-column flex justify-center items-center`}
+                  className={`text-text-light sticky-column second-sticky-column `}
                 >
-                  {promoted && item.promoted ? (
+                  {promoted && item?.promoted ? (
                     <img
                       src={fire}
                       alt="Promoted"
                       className="w-8 h-8 mr-2 rounded-full"
+                      style={{
+                        display: "inline-block",
+                        verticalAlign: "middle",
+                      }}
                     />
                   ) : (
                     rank
@@ -157,51 +216,54 @@ const Table = ({
                 </td>
                 <td className="text-text-light min-w-40 sticky-column third-sticky-column p-2 px-5">
                   <IconText
-                    icon={item.coin_picture || heartFill}
-                    text={item.coin_name || "Name"}
+                    icon={item?.coin_picture || heartFill}
+                    coin_symbol={item?.coin_symbol}
+                    text={item?.coin_name || "Name"}
                     promoted={true}
                   />
                 </td>
                 <td className="text-text-info">
-                  {item.category_name || "Category"}
+                  {item?.category_name || "Category"}
                 </td>
                 <td className="text-text-light min-w-40">
                   <IconText
-                    icon={item.chain_icon || heartFill}
-                    text={item.coin_symbol || "Name"}
+                    icon={item?.chain_icon || heartFill}
+                    text={item?.coin_symbol || "Name"}
                     promoted={true}
                   />
                 </td>
                 <td className="text-text-light min-w-40">
-                  <ColoredNumber number={item.priceUsd24hAgo || 0} />
+                  <ColoredNumber number={parseInt(item?.priceUsd24hAgo) || 0} />
                 </td>
                 <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item.marketCapUsd || 0} />
+                  <FormatMarketCap value={item?.marketCapUsd || 0} />
                 </td>
                 <td className="text-text-light min-w-40">
-                  <FormatMarketCap value={item.priceUsd || 0} />
+                  <FormatMarketCap value={parseInt(item?.priceUsd) || 0} />
                 </td>
                 <td className="text-text-light min-w-40">
-                  {formatDate(item.launch_date)}
+                  {formatDate(item?.launch_date)}
                 </td>
+                <tr key={`spacer-${index}`} className="h-2 md:h-4"></tr>
+
                 <td
                   className="text-text-light min-w-40 border-2 border-text-primary flex items-center justify-center gap-1 rounded-md px-2 py-2 w-32"
                   onClick={(e) => {
                     e.stopPropagation(); // Prevents navigating when clicking on the vote section
-                    handleVote(e, item.id);
+                    handleVote(e, item?.id);
                   }}
                 >
                   <img src={heartFill} alt="Vote" />
-                  {votingStatus[item.id] ? (
+                  {votingStatus[item?.id] ? (
                     <Text>Voting..</Text>
                   ) : (
-                    <Text>{item.total_votes || 0}</Text>
+                    <Text>{item?.total_votes || 0}</Text>
                   )}
                 </td>
               </>
             )}
           </tr>
-          <tr key={`spacer-${index}`} className="h-4"></tr>
+          <tr key={`spacer-${index}`} className="h-2 md:h-4"></tr>
         </React.Fragment>
       );
     });
@@ -228,15 +290,25 @@ const Table = ({
                     } ${column.sortable ? "cursor-pointer" : ""}`}
                   >
                     {column.title}
-                    {column.icon && (
-                      <span className="text-text-primary">{column.icon}</span>
+                    {column.sortable && (
+                      <span className="ml-2 inline-block">
+                        {sortConfig.key === column.key ? (
+                          sortConfig.direction === "ascending" ? (
+                            <FaSortUp />
+                          ) : (
+                            <FaSortDown />
+                          )
+                        ) : (
+                          <FaSort />
+                        )}
+                      </span>
                     )}
                     <span className={getClassNamesFor(column.key)}></span>
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="text-center">
+            <tbody className="text-center pt-4">
               <BodyColumn />
             </tbody>
           </table>

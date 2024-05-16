@@ -1,12 +1,48 @@
 import defaultIcon1 from "../../../../assets/icons/default-icon1.png";
+import icon1 from "../../../../assets/socials/coin-1.png";
+import icon2 from "../../../../assets/socials/coin-2.png";
 
-export const IconText = ({ icon, text, rank, fire, item, promoted }) => (
+export const IconText = ({
+  icon,
+  coin_symbol,
+  text,
+  rank,
+  fire,
+  item,
+  promoted,
+  marketCap,
+  gecko,
+}) => (
   <div className="flex items-center  justify-center">
     {item?.promoted ? (
       <img src={fire} alt="Promoted" className="w-8 h-8 mr-2 rounded-full" />
     ) : (
       <span className="mr-2">{rank}</span>
     )}
+    <div className="flex gap-1 flex-col">
+      {gecko && (
+        <img
+          src={icon1}
+          alt=""
+          className="w-4 h-4 rounded-full mr-4"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = defaultIcon1;
+          }}
+        />
+      )}{" "}
+      {marketCap && (
+        <img
+          src={icon2}
+          alt=""
+          className="w-4 h-4 rounded-full mr-4"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = defaultIcon1;
+          }}
+        />
+      )}
+    </div>
     <img
       src={icon}
       alt=""
@@ -17,11 +53,12 @@ export const IconText = ({ icon, text, rank, fire, item, promoted }) => (
       }}
     />
     <div
-      className={`flex-1 text-start ${
-        promoted ? "w-[100px] max-w-[100px]" : "w-[150px] max-w-[150px]"
-      } `}
+      className={`flex flex-col text-start ${
+        promoted ? "w-[100px] max-w-[100px]" : "w-[90px] max-w-[150px]"
+      }`}
     >
-      {text}
+      <div>{text}</div>
+      <div className="text-sm text-gray-500">{coin_symbol}</div>
     </div>
   </div>
 );

@@ -50,8 +50,10 @@ const CardComponent = ({ title, data }) => {
               </div>
             </div>
             <div className="flex">
-              <Text className="text-text-secondary mr-0 md:mr-5">
-                {item?.date?.substring(0, 8) + ".." || "4 hours ago"}
+              <Text className="text-text-secondary mr-4 md:mr-6">
+                {item?.date?.length > 10
+                  ? item?.date?.substring(0, 10) + ".."
+                  : item?.date?.substring(0, 10)}
               </Text>
               <img src={rightIcon} alt="" className="w-auto h-6" />
             </div>

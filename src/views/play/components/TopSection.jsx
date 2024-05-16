@@ -6,8 +6,33 @@ import BitCoinHeading from "../utils/BitCoinHeading";
 import SocialIcons from "../utils/SocialIcons";
 import Description from "../utils/Description";
 import bgImage from "../../../assets/banners/descriptionbg.png";
+import heartFill from "../../../assets/icons/heart-fill.png";
+import { useAddVoteMutation } from "../../../app/features/api";
+import { toast } from "react-toastify";
 
 const TopSection = ({ details, refetch, status }) => {
+  const [addVoteMutation, { isLoading: isVoting }] = useAddVoteMutation();
+
+  const handleVote = () => {
+    addVoteMutation({ id: details?.id })
+      .unwrap()
+      .then((data) => {
+        console.log("Vote added successfully:", data);
+        toast.success("Vote added successfully", {
+          position: "top-center",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+      })
+      .catch((error) => {
+        console.error("Failed to add vote:", error);
+        toast.error(error?.data?.message || "Error voting", {
+          position: "top-center",
+        });
+      });
+  };
+
   const backgroundImage = details?.coin_picture
     ? details?.coin_picture
     : bgImage;
@@ -19,6 +44,33 @@ const TopSection = ({ details, refetch, status }) => {
           <LogoSection details={details} />
           <SwapItem details={details} />
         </div>
+        <div className="flex-col justify-center items-center gap-2 md:items-end flex md:hidden">
+          <div className="relative" onClick={handleVote}>
+            {details?.total_vote > 250 && (
+              <div className="absolute bg-gray-800 text-white py-1 px-2 rounded-md text-xs z-10 bottom-8 left-0 opacity-0 transition-opacity duration-200">
+                {details?.total_vote}
+              </div>
+            )}
+            <div
+              className={`text-text-light border-2 border-text-primary flex items-center justify-center gap-1 flex-wrap rounded-md p-2 w-28 cursor-pointer ${
+                isVoting ? "opacity-50" : ""
+              }`}
+            >
+              {isVoting ? (
+                <p>Voting...</p>
+              ) : (
+                <>
+                  <img src={heartFill} alt="" className="me-2" />
+                  <p>{details?.total_vote}</p>
+                </>
+              )}
+            </div>
+          </div>
+          <p className="text-xs text-center self-center text-white">
+            Today's Vote: {details?.today_votes ? details?.today_votes : 0}
+          </p>
+        </div>
+
         <div className="lg:col-span-8  bg-secondary py-5 rounded-lg border-b-2 border-[#323232] relative">
           {/* Background as watermark */}
           <div

@@ -8,7 +8,7 @@ const DownSection = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5  mb-24">
       <div className="col-span-1 md:col-span-2 lg:col-span-4 z-10">
-        <SafetyChecks />
+        {/* <SafetyChecks /> */}
       </div>
       <div className="col-span-1 md:col-span-2 lg:col-span-8 z-10">
         <div className="mb-16">

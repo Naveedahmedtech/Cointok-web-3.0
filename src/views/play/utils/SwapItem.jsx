@@ -38,8 +38,8 @@ const SwapItem = ({ details, adds, buyTax = "0.00", saleTax = "0.00" }) => {
 
   const platform_image =
     details?.coin_type === "fair_launch"
-      ? details?.listing_platform_icon
-      : details?.presale_platform_icon;
+      ? details?.listingPlatform_icon
+      : details?.listingPlatform_icon;
 
   const platform_link =
     details?.coin_type === "fair_launch"
