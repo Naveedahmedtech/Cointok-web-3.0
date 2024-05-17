@@ -163,7 +163,7 @@ const Table = ({
                 >
                   <IconText
                     icon={item?.chain_icon || heartFill}
-                    text={item?.coin_symbol || "Name"}
+                    text={item?.chain_name || "Name"}
                   />
                 </td>
                 <td
@@ -228,7 +228,7 @@ const Table = ({
                 <td className="text-text-light min-w-40">
                   <IconText
                     icon={item?.chain_icon || heartFill}
-                    text={item?.coin_symbol || "Name"}
+                    text={item?.chain_name || "Name"}
                     promoted={true}
                   />
                 </td>
